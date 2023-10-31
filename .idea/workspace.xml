@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ffd495b2-b0ec-41cf-9531-8828567c2b57" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/mmpi2/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mmpi2/data/QuestionData.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mmpi2/data/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mmpi2/gui/MainWindow.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mmpi2/gui/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mmpi2/gui/form/FormWidget.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mmpi2/gui/form/IntroFormWidget.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mmpi2/gui/form/MainForm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mmpi2/gui/form/QuestionFormWidget.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mmpi2/gui/form/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mmpi2/resources/icon.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mmpi2/run.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mmpi2/setup.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2XWkKZnK0JY9gr67FUrFVPkzzIP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/nick/dev/development/git/mmpi2/mmpi2/run.py",
+    "settings.editor.selected.configurable": "reference.idesettings.debugger.python"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mmpi2/resources" />
+      <recent name="$PROJECT_DIR$/mmpi2" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mmpi2/gui/form" />
+      <recent name="$PROJECT_DIR$/mmpi2/data" />
+      <recent name="$PROJECT_DIR$/mmpi2/resources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="run" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="mmpi2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.10" />
+      <option name="SDK_NAME" value="Python 3.10" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mmpi2" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mmpi2/run.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ffd495b2-b0ec-41cf-9531-8828567c2b57" name="Changes" comment="" />
+      <created>1698752160345</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698752160345</updated>
+    </task>
+    <servers />
+  </component>
+</project>
