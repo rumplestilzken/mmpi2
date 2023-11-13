@@ -4,25 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/MainForm.java" afterDir="false" />
+    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Continued Form Development">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmpi2/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmpi2/data/QuestionData.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmpi2/data/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmpi2/gui/MainWindow.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmpi2/gui/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmpi2/gui/form/FormWidget.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmpi2/gui/form/IntroFormWidget.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmpi2/gui/form/MainForm.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmpi2/gui/form/QuestionFormWidget.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmpi2/gui/form/__init__.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mmpi2/resources/icon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmpi2/resources/view-source_www.ohiofamilyrights.com_docs_MMPI_scoring.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmpi2/run.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmpi2/setup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/QuestionData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/QuestionData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/Init.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/Init.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/QuestionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/QuestionForm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,6 +110,19 @@
       <option name="presentableId" value="Default" />
       <updated>1698840341219</updated>
     </task>
+    <task id="LOCAL-00001" summary="Continued Form Development">
+      <option name="closed" value="true" />
+      <created>1699888954508</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1699888954508</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Continued Form Development" />
+    <option name="LAST_COMMIT_MESSAGE" value="Continued Form Development" />
   </component>
 </project>

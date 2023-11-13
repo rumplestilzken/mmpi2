@@ -10,7 +10,7 @@ public class Init {
         QApplication.initialize(args);
         
         QMainWindow window = new QMainWindow();
-        window.setFixedSize(700, 500);
+        window.setFixedSize(1024, 768);
 
         QMenu fileMenu = window.menuBar().addMenu("File");
         QAction saveQuestionAnswersMenuItem = new QAction("Save Question Answers");
