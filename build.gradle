@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.rumplestilzken'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation group: 'io.qtjambi', name: 'qtjambi', version: '5.15.17'
+}
+
+test {
+    useJUnitPlatform()
+}
