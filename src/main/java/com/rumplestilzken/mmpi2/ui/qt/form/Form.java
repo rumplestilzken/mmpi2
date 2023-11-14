@@ -13,14 +13,9 @@ public class Form extends QWidget {
     }
 
     public void buildUI() {
-        QLayout layout = new QGridLayout();
-        this.setLayout(layout);
-    }
-
-    public void next(Form currentForm) {
-        parent.children().clear();
-        parent.children().add(currentForm);
-        parent.update();
-        parent.repaint();
+        if(layout() == null) {
+            QLayout layout = new QGridLayout();
+            this.setLayout(layout);
+        }
     }
 }

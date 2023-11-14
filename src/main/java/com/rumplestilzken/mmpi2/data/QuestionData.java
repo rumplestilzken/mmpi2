@@ -119,7 +119,7 @@ questions.add("I seem to be about as capable and smart as most others around me.
 questions.add("I have a great deal of stomach trouble.");
 questions.add("I like dramatics.");
 questions.add("I know who is responsible for most of my troubles.");
-        questions.add("Sometimes I am so strongly attracted by the personal articles of others, such as shoes, gloves, etc., that I want to handle or steal them, even though I have no use for them.");
+        questions.add("Sometimes I am so strongly attracted by the personal articles of others, such as shoes, \ngloves, etc., that I want to handle or steal them, even though I have no use for them.");
         questions.add("The sight of blood does not frighten me or make me sick.");
         questions.add("Often I can't understand why I have been so irritable or grouchy.");
 questions.add("I have never vomited blood or coughed up blood.");
@@ -217,7 +217,7 @@ questions.add("I hardly ever notice my heart pounding and I am seldom short of b
 questions.add("I like to talk about sex.");
 questions.add("I like to visit places where I have never been before.");
 questions.add("I have been inspired to a program of life based on duty which I have since carefully followed.");
-questions.add("I have, at times stood in the way of people who were trying to do something, not because it amounted to much, but because of the principle of the thing.");
+questions.add("I have, at times stood in the way of people who were trying to do something, not because it amounted to much, but because of the principle \n of the thing.");
 questions.add("I get mad easily and then get over it soon.");
 questions.add("I have been quite independent and free from family rule.");
 questions.add("I brood a great deal.");
@@ -450,7 +450,7 @@ questions.add("I am afraid of finding myself in a closet or small closed space."
 questions.add("I must admit that I have at times been worried beyond reason over something that really did not matter.");
 questions.add("I do not try to cover up my poor opinion or pity of people so that they won't know how I feel.");
 questions.add("I am a high-strung person.");
-questions.add("I have frequently worked under people who seem to have things arranged so that they get credit for good work but are able to pass mistakes onto those under them.");
+questions.add("I have frequently worked under people who seem to have things arranged so that they get credit for good work but are able to pass mistakes\n onto those under them.");
 questions.add("I sometimes find it hard to stick up for my rights because I am so reserved.");
         questions.add("Dirt frightens or disgusts me.");
 questions.add("I have a daydream life about which I do not tell other people.");
@@ -605,4 +605,26 @@ questions.add("It takes a great deal of effort for me to remember what people te
             this.text = text;
         }
     }
+
+public class QuestionAnswerData {
+
+        int index = -1;
+        Boolean answer = null;
+
+        public int getIndex() {
+                return index;
+        }
+
+        public void setIndex(int index) {
+                this.index = index;
+        }
+
+        public Boolean getAnswer() {
+                return answer;
+        }
+
+        public void setAnswer(Boolean answer) {
+                this.answer = answer;
+        }
+}
 }

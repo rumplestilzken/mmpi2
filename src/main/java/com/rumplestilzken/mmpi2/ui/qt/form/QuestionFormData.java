@@ -33,7 +33,7 @@ public class QuestionFormData extends Form {
         layout.addWidget(trueRadio, 0, 0);
 
         QRadioButton falseRadio = new QRadioButton();
-        falseRadio.setMaximumSize(20, 20);
+        falseRadio.setMaximumSize(40, 20);
         layout.addWidget(falseRadio, 0, 1);
 
 //        System.out.println(text);

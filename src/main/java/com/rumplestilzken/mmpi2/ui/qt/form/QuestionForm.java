@@ -14,6 +14,7 @@ public class QuestionForm extends Form{
         super.buildUI();
 
         QGridLayout layout = (QGridLayout)layout();
+        layout.setObjectName("Layout");
 
         QGroupBox tf = new QGroupBox();
 
@@ -41,17 +42,15 @@ public class QuestionForm extends Form{
         layout.addWidget(tf, 0, 0, Qt.AlignmentFlag.AlignTop);
 
         QScrollArea questionsScroll = new QScrollArea();
+        questionsScroll.setObjectName("QuestionScroll");
         questionsScroll.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn);
-
         questionsScroll.setLayout(new QHBoxLayout());
-
-//        questionsScroll.setLayout(new QGridLayout());
-//        questionBoxLayout.setMaximumSize(400, 400);
         questionsScroll.setFixedWidth(980);
         questionsScroll.setFixedHeight(650);
+        questionsScroll.setWidgetResizable(true);
 
-//        questionBoxLayout.addWidget(questionsScroll);
         QGroupBox questionBox = new QGroupBox();
+        questionBox.setObjectName("QuestionBox");
         questionBox.setLayout(new QVBoxLayout());
 
         for(QuestionData.Question q : new QuestionData().getQuestions())
@@ -60,13 +59,37 @@ public class QuestionForm extends Form{
             qfd.setText(q.getText());
             qfd.setIndex(q.getIndex());
             qfd.buildUI();
-//            layout.addWidget(qfd);
             questionBox.layout().addWidget(qfd);
         }
-        questionsScroll.setWidgetResizable(true);
+
+//        questionsScroll.layout().addWidget(questionBox);
         questionsScroll.setWidget(questionBox);
 
         layout.addWidget(questionsScroll);
+
+        QPushButton getResultsButton = new QPushButton("Get Results");
+        getResultsButton.released.connect(this, "getResults()");
+        layout.addWidget(getResultsButton, 0, 2, Qt.AlignmentFlag.AlignTop);
+
+    }
+
+    void getResults() {
+        System.out.println("Get Results");
+        QGridLayout layout = (QGridLayout)layout();
+        System.out.println(layout.getObjectName());
+        System.out.println("Parent");
+        parent.children().stream().forEach(i -> System.out.println(i.getObjectName()));
+        System.out.println("layout.children()");
+        layout.children().stream().forEach(i -> System.out.println(i.getObjectName()));
+        System.out.println("children()");
+        children().stream().forEach(i -> System.out.println(i.getObjectName()));
+        System.out.println("QuestionScroll--");
+        children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get().children().stream().forEach(i -> System.out.println(i.getObjectName()) );
+        System.out.println((children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get().children().stream().filter(i -> i.objectName().equals("")).findFirst().get().objectName()));
+        System.out.println(parent.children().stream().filter(i -> i.getObjectName().equals("_layout")).count());
+        System.out.println(parent.children().stream().filter(i -> i.getObjectName().equals("_layout")).findFirst().get().children().stream().count());
+
+
 
     }
 }

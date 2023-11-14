@@ -37,7 +37,7 @@ public class MainForm extends Form {
     }
 
     public void next() {
-        System.out.println(children().stream().count());
+//        System.out.println(children().stream().count());
 //        children().stream().forEach(i -> System.out.println(i.getObjectName()));
 //        children().stream().forEach(i -> i.dispose());
 
