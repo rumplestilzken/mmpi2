@@ -87,34 +87,15 @@ public class QuestionForm extends Form{
     }
 
     void getResults() {
-        System.out.println("Get Results");
         QGridLayout layout = (QGridLayout)layout();
 
         List<QObject> objects = new ArrayList<QObject>();
         List<QuestionData.QuestionAnswerData> answers = new ArrayList<QuestionData.QuestionAnswerData>();
 
-//        ((QScrollArea)children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get())
-//                .children().stream().findFirst().get()
-//                .children().stream().findFirst().get()
-//                .children().forEach(i -> System.out.println(i.getObjectName()));
-
-        ((QScrollArea)children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get())
+        objects.addAll(((QScrollArea) children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get())
                 .children().stream().findFirst().get()
                 .children().stream().findFirst().get()
-                .children().forEach(i -> objects.add(i));
-
-//          objects.stream().forEach(i -> i.dumpObjectTree());
-
-//        System.out.println(objects.stream().findFirst().get().inherits("io.qt.widgets.QVBoxLayout"));
-//        System.out.println(objects.stream().findFirst().get().inherits("com.rumplestilzken.mmpi2.ui.qt.form.QuestionFormData"));
-//        System.out.println(((QVBoxLayout)objects.stream().findFirst().get()).getObjectName());
-//        System.out.println(((QVBoxLayout)objects.stream().findFirst().get()).count());
-//        System.out.println(((QVBoxLayout)objects.stream().findFirst().get()).children().stream().count());
-//        System.out.println(((QVBoxLayout)objects.stream().findFirst().get()).children().count());
-//        System.out.println(((QVBoxLayout)objects.stream().findFirst().get()).itemAt(0).getClass().toString());
-//        System.out.println(((QVBoxLayout)objects.stream().findFirst().get()).itemAt(0).widget().getObjectName());
-//        ((QVBoxLayout)objects.stream().findFirst().get()).itemAt(0).widget().children().forEach(i -> System.out.println(i.getObjectName()));
-//        System.out.println(((QVBoxLayout)objects.stream().findFirst().get()).itemAt(0).widget().findChild("True").getObjectName());
+                .children());
 
         for(int i = 0; i < objects.stream().count()-1; i++){
             System.out.println(i);
@@ -125,68 +106,9 @@ public class QuestionForm extends Form{
             answers.add(new QuestionData.QuestionAnswerData(i, answer));
         }
 
-
-
-        System.out.println(((QVBoxLayout)objects.stream().findFirst().get()).itemAt(0).widget().layout().children().stream().count());
-
-
-
-//        System.out.println(((QVBoxLayout)objects.stream().findFirst().get()).layout().getObjectName());
-//        System.out.println(((QVBoxLayout)objects.stream().findFirst().get()).layout().children().first().getObjectName());
-//        System.out.println(((QVBoxLayout)objects.stream().findFirst().get()).children().first().getObjectName());
-//
-//        objects.stream().forEach(i -> System.out.println(i.getObjectName()));
-
-//        objects.stream().forEach(i -> System.out.println(((QVBoxLayout)i).parent().children().stream().count()));
-
-//        objects.stream().forEach(i -> ((QVBoxLayout)objects.stream().findFirst().get()).children().stream().count());
-
-        List<QLayoutItem> qobjects = new ArrayList<QLayoutItem>();
-//        objects.stream().forEach(i -> qobjects.add(((QVBoxLayout)objects.stream().findFirst().get()).widget().getObjectName()));
-
-        qobjects.forEach(i -> i.layout().getObjectName());
-
-
-//        System.out.println(((QVBoxLayout)objects.stream().findFirst().get()).children().first().inherits("com.rumplestilzken.mmpi2.ui.qt.form.QuestionFormData"));
-
-//        System.out.println(objects.stream().findFirst().get().getObjectName());
-
-//        objects.stream().forEach(i -> System.out.println(i.children().first().getObjectName()));
-//        objects.stream().forEach(i -> System.out.println(((QVBoxLayout)i).layout().children().first().getObjectName()));
-
-
-
-//        ((QScrollArea)children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get())
-//                .children().stream().findFirst().get()
-//                .children().stream().findFirst().get()
-//                .children().forEach(i -> System.out.println(((QVBoxLayout)i).children().stream().findFirst().get().getObjectName()));
-
-//        System.out.println(((QGroupBox)((QScrollArea)children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get())
-//                .children().stream().findFirst().get()
-//                .children().stream().findFirst().get()) //GroupBox
-//                .children().stream().findFirst().get().getObjectName());
-//                .children().stream().forEach(i -> System.out.println(i.getObjectName()));
-//                children().stream().findFirst().get()) //QVBoxLayout
-//                .children().stream().count()
-
-//        ((QScrollArea)children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get())
-//                .children().stream().findFirst().get()
-//                .children().stream().findFirst().get().children().forEach(i -> qfd.add((QuestionFormData) i));
-
-//        System.out.println(qfd.stream().count());
-
-//        qfd.stream().forEach(i -> answers.add(new QuestionData.QuestionAnswerData(i.getIndex(), getBoolean(Boolean.valueOf(i.getTrueRadio().isEnabled()), Boolean.valueOf(i.getFalseRadio().isEnabled())))));
-
         ResultProcessor rp = new ResultProcessor();
         JSONObject jo = rp.getJSONFromAnswers(answers);
         System.out.println(jo.toString());
-
-//        ((QScrollArea)children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get()).layout().children().stream().findFirst().get().children().forEach(i -> System.out.println(i.getObjectName()));
-//        System.out.println(parent.children().stream().filter(i -> i.getObjectName().equals("_layout")).count());
-//        System.out.println(parent.children().stream().filter(i -> i.getObjectName().equals("_layout")).findFirst().get().children().stream().count());
-
-
-
     }
 
     Boolean getBoolean(Boolean t, Boolean f ){
