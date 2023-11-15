@@ -7,6 +7,10 @@ import java.util.List;
 public class ResultProcessor {
 
     public JSONObject getJSONFromAnswers(List<QuestionData.QuestionAnswerData> answers) {
-        return new JSONObject();
+        JSONObject answerObject = new JSONObject();
+        for(QuestionData.QuestionAnswerData answer : answers) {
+            answerObject.put(Integer.toString(answer.getIndex()), answer.getAnswer() == null ? "?" : answer.getAnswer());
+        }
+        return answerObject;
     }
 }

@@ -606,7 +606,12 @@ questions.add("It takes a great deal of effort for me to remember what people te
         }
     }
 
-public class QuestionAnswerData {
+public static class QuestionAnswerData {
+
+        public QuestionAnswerData(int index, Boolean answer) {
+                this.index = index;
+                this.answer = answer;
+        }
 
         int index = -1;
         Boolean answer = null;

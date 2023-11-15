@@ -9,6 +9,32 @@ import io.qt.widgets.QWidget;
 public class QuestionFormData extends Form {
     String text = "";
     int index = -1;
+    QRadioButton trueRadio = null;
+    QRadioButton falseRadio = null;
+
+    public QRadioButton getTrueRadio() {
+        return trueRadio;
+    }
+
+    public void setTrueRadio(QRadioButton trueRadio) {
+        this.trueRadio = trueRadio;
+    }
+
+    public QRadioButton getFalseRadio() {
+        return falseRadio;
+    }
+
+    public void setFalseRadio(QRadioButton falseRadio) {
+        this.falseRadio = falseRadio;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public int getIndex() {
+        return index;
+    }
 
     public void setText(String text) {
         this.text = text;
@@ -20,6 +46,7 @@ public class QuestionFormData extends Form {
 
     public QuestionFormData(QWidget parent) {
         super(parent);
+        setObjectName("QFD");
     }
 
     @Override
@@ -28,11 +55,13 @@ public class QuestionFormData extends Form {
 
         QGridLayout layout = (QGridLayout)layout();
 
-        QRadioButton trueRadio = new QRadioButton();
+        trueRadio = new QRadioButton();
+        trueRadio.setObjectName("True");
         trueRadio.setMaximumSize(20, 20);
         layout.addWidget(trueRadio, 0, 0);
 
-        QRadioButton falseRadio = new QRadioButton();
+        falseRadio = new QRadioButton();
+        falseRadio.setObjectName("False");
         falseRadio.setMaximumSize(40, 20);
         layout.addWidget(falseRadio, 0, 1);
 
