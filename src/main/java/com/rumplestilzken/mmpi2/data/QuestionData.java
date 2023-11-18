@@ -576,6 +576,17 @@ questions.add("It takes a great deal of effort for me to remember what people te
         return questions;
     }
 
+    public List<Question> getShortFormQuestions() {
+        List<String> questionText = getQuestionText();
+        List<Question> questions = new ArrayList<Question>();
+        for(int i = 1; i <= 370; i++)
+        {
+            Question q = new Question(i, questionText.get(i-1));
+            questions.add(q);
+        }
+        return questions;
+    }
+
     public List<Question> getQuestions() {
         List<String> questionText = getQuestionText();
         List<Question> questions = new ArrayList<Question>();

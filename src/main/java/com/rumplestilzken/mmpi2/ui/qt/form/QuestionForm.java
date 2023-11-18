@@ -22,40 +22,82 @@ public class QuestionForm extends Form{
     public void buildUI() {
         super.buildUI();
 
+        QMainWindow mainWindow = (QMainWindow) parent;
+        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("LoadAnswers")).findFirst().get().setEnabled(true);
+        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SaveResults")).findFirst().get().setEnabled(true);
+        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SaveQuestions")).findFirst().get().setEnabled(true);
+
+        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("LoadAnswers")).findFirst().get()
+                .triggered.connect(this, "loadAnswers()");
+
         QGridLayout layout = (QGridLayout)layout();
         layout.setObjectName("Layout");
 
+        QGroupBox topGroupBox = new QGroupBox();
+        topGroupBox.setObjectName("TopGroupBox");
+        topGroupBox.setLayout(new QGridLayout());
+
         QGroupBox tf = new QGroupBox();
+        tf.setObjectName("TF");
 
         tf.setLayout(new QHBoxLayout());
         tf.setFixedHeight(40);
-        tf.setFixedWidth(100);
+        tf.setFixedWidth(90);
 
-        QSpacerItem spacer = new QSpacerItem(8, 0);
-        ((QHBoxLayout)tf.layout()).addSpacerItem(spacer);
+//        QSpacerItem spacer = new QSpacerItem(8, 0);
+//        ((QHBoxLayout)tf.layout()).addSpacerItem(spacer);
 
         QLabel t = new QLabel("T");
-//        t.setFixedWidth(200);
-//        ((QGridLayout)tf.layout()).addWidget(t, 0, 0, Qt.AlignmentFlag.AlignLeft);
+        t.setObjectName("T");
         tf.layout().addWidget(t);
 
-//        QSpacerItem spacer2 = new QSpacerItem(5, 0);
-//        ((QHBoxLayout)tf.layout()).addSpacerItem(spacer2);
-
         QLabel f = new QLabel("F");
+        f.setObjectName("F");
         tf.layout().addWidget(f);
 
-//        f.setFixedWidth(50);
-//        layout.addWidget(f, 0, 0, Qt.AlignmentFlag.AlignTop);
-//        ((QGridLayout)tf.layout()).addWidget(f, 0 , 1, Qt.AlignmentFlag.AlignRight);
-        layout.addWidget(tf, 0, 0, Qt.AlignmentFlag.AlignTop);
+
+        QGroupBox mfgb = new QGroupBox();
+        mfgb.setObjectName("MFGB");
+        mfgb.setLayout(new QVBoxLayout());
+        mfgb.setFixedWidth(100);
+
+        QRadioButton male = new QRadioButton("Male");
+        male.setObjectName("MaleRadioButton");
+        mfgb.layout().addWidget(male);
+        QRadioButton female = new QRadioButton("Female");
+        female.setObjectName("FemaleRadioButton");
+        mfgb.layout().addWidget(female);
+//        layout.addWidget(mfgb);
+
+        QGroupBox form = new QGroupBox();
+        form.setObjectName("Form");
+        form.setLayout(new QVBoxLayout());
+        form.setFixedWidth(110);
+
+        QRadioButton shortForm = new QRadioButton("Short Form");
+        shortForm.setObjectName("ShortRadioButton");
+        shortForm.clicked.connect(this, "shortForm()");
+        form.layout().addWidget(shortForm);
+        QRadioButton longForm = new QRadioButton("Long Form");
+        longForm.clicked.connect(this, "longForm()");
+        longForm.setChecked(true);
+        longForm.setObjectName("LongRadioButton");
+        form.layout().addWidget(longForm);
+
+        ((QGridLayout)topGroupBox.layout()).addWidget(tf, 0, 0, Qt.AlignmentFlag.AlignLeft);
+        ((QGridLayout)topGroupBox.layout()).addWidget(mfgb, 0, 1, Qt.AlignmentFlag.AlignTop);
+        ((QGridLayout)topGroupBox.layout()).addWidget(form, 0, 2, Qt.AlignmentFlag.AlignTop);
+
+//        layout.addWidget(tf);
+
+        layout.addWidget(topGroupBox);
 
         QScrollArea questionsScroll = new QScrollArea();
         questionsScroll.setObjectName("QuestionScroll");
         questionsScroll.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn);
         questionsScroll.setLayout(new QHBoxLayout());
         questionsScroll.setFixedWidth(980);
-        questionsScroll.setFixedHeight(650);
+        questionsScroll.setFixedHeight(600);
         questionsScroll.setWidgetResizable(true);
 
         QGroupBox questionBox = new QGroupBox();
@@ -67,7 +109,6 @@ public class QuestionForm extends Form{
         for(QuestionData.Question q : new QuestionData().getQuestions())
         {
             QuestionFormData qfd = new QuestionFormData(this);
-            qfd.setObjectName("QFD+" + q.getIndex());
             qfd.setText(q.getText());
             qfd.setIndex(q.getIndex());
             qfd.buildUI();
@@ -83,7 +124,39 @@ public class QuestionForm extends Form{
         QPushButton getResultsButton = new QPushButton("Get Results");
         getResultsButton.released.connect(this, "getResults()");
         layout.addWidget(getResultsButton, 0, 2, Qt.AlignmentFlag.AlignTop);
+    }
 
+    void loadAnswers() {
+        String answers = "TFFTFTTTTFTFTTTTFFTTTTTFFTFFTFTTTFTFTTTFTFFFTFTTTTTTTFTFFTFFTFTFFFTTFFFTFFT\n" +
+                "TTTTFTTFTTFTTTTFFTTTFTTFFFTFFTFTTFTFFTFTTTTFTFTTTFTFTTTFTFTFTFFTFTTTFFFTFFF\n" +
+                "FTTTTFTFTFTFFTFTFTTFFTFTFTFTFTTTTFFTTTTFFTFFTTFFTTFFTFFTFTTTTTFTTFFTTFTTFTT\n" +
+                "TTFTTTTTFFFTFFFFTFTFTFFTTTFFTTTFTFTTTFTFFTFFFTTFFTTTTTTFFFTTTFFFFFFFFTFTFTF\n" +
+                "FTFTTFTTTFFFFTTTTTFTTFFTTFTTFTTFFFTFTTTFTFFFTTFFFTFTFTFTFFFTFTFFTTTFFFFFTTF\n" +
+                "FTFTTFFTFTTFFTTTFFFFFFTFFFFTTTFFTTTFFTTTTFTTTFFTTFFTFFTTTTTFTTTFTFTFFFFFFTF\n" +
+                "FTFFFFFTTTTTFTTTTFTTFTTTTTFFTTTFFFTTTFFTFTTTFFFFTFTTFTFFTTFTTTTTFFFTFFTFTFT\n" +
+                "TTFTFFTTTTFFTFFFTTFTTTTTTTTTFFFTFFFFTTFTTF";
+
+        QGroupBox gb = (QGroupBox) children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get()
+                .children().stream().findFirst().get()
+                .children().stream().findFirst().get();
+
+        for(int index = 0; index < answers.length()-1; index++) {
+            final int finalIndex = index+1;
+            char currentChar = answers.toCharArray()[index];
+            try {
+                QuestionFormData qfd = (QuestionFormData) gb.children().stream().filter(i -> i.getObjectName().equals("QFD_" + Integer.toString(finalIndex))).findFirst().get();
+                if(currentChar == 'T')
+                {
+                    qfd.getTrueRadio().setChecked(true);
+                }
+                else {
+                    qfd.getFalseRadio().setChecked(true);
+                }
+            }
+            catch (Exception e) {
+                break;
+            }
+        }
     }
 
     void getResults() {
@@ -92,29 +165,81 @@ public class QuestionForm extends Form{
         List<QObject> objects = new ArrayList<QObject>();
         List<QuestionData.QuestionAnswerData> answers = new ArrayList<QuestionData.QuestionAnswerData>();
 
+        QGroupBox gb = ((QGroupBox)children().stream().filter(i -> i.getObjectName().equals("TopGroupBox")).findFirst().get());
+        QGroupBox mfgb = (QGroupBox) gb.children().stream().filter(i -> i.getObjectName().equals("MFGB")).findFirst().get();
+        QRadioButton mRadio = (QRadioButton)mfgb.children().stream().filter(i -> i.getObjectName().equals("MaleRadioButton")).findFirst().get();
+        QRadioButton fRadio = (QRadioButton)mfgb.children().stream().filter(i -> i.getObjectName().equals("FemaleRadioButton")).findFirst().get();
+        boolean male = mRadio.isChecked();
+        boolean female = fRadio.isChecked();
+
         objects.addAll(((QScrollArea) children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get())
                 .children().stream().findFirst().get()
                 .children().stream().findFirst().get()
                 .children());
 
+        QVBoxLayout vboxLayout = ((QVBoxLayout)objects.stream().findFirst().get());
         for(int i = 0; i < objects.stream().count()-1; i++){
-            System.out.println(i);
-            QWidget widget = ((QVBoxLayout)objects.stream().findFirst().get()).itemAt(i).widget();
+            QWidget widget = vboxLayout.itemAt(i).widget();
             Boolean answer = null;
             if (((QuestionFormData)widget).getTrueRadio().isChecked()) answer = Boolean.TRUE;
             if (((QuestionFormData)widget).getFalseRadio().isChecked()) answer = Boolean.FALSE;
-            answers.add(new QuestionData.QuestionAnswerData(i, answer));
+            answers.add(new QuestionData.QuestionAnswerData(i+1, answer));
         }
+
+        long isTrue = answers.stream().filter(i -> i.getAnswer() == Boolean.TRUE).count();
+        long isFalse = answers.stream().filter(i -> i.getAnswer() == Boolean.FALSE).count();
+        long isUnaswered = answers.stream().filter(i -> i.getAnswer() == null).count();
+
+        System.out.println("TRUE Count:" + Long.toString(isTrue));
+        System.out.println("FALSE Count:" + Long.toString(isFalse));
+        System.out.println("UNASWERED Count:" + Long.toString(isUnaswered));
+
 
         ResultProcessor rp = new ResultProcessor();
         JSONObject jo = rp.getJSONFromAnswers(answers);
         System.out.println(jo.toString());
     }
 
-    Boolean getBoolean(Boolean t, Boolean f ){
-        if (t) return Boolean.TRUE;
-        if (f) return Boolean.FALSE;
+    void shortForm() {
+        QGroupBox gb = ((QGroupBox)((QScrollArea) children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get())
+                .children().stream().findFirst().get()
+                .children().stream().findFirst().get());
+        gb.children().stream().forEach(i -> i.dispose());
 
-        return null;
+        QVBoxLayout vboxLayout = new QVBoxLayout();
+        vboxLayout.setObjectName("VBoxLayout");
+        gb.setLayout(vboxLayout);
+
+        for(QuestionData.Question q : new QuestionData().getShortFormQuestions())
+        {
+            QuestionFormData qfd = new QuestionFormData(this);
+            qfd.setText(q.getText());
+            qfd.setIndex(q.getIndex());
+            qfd.buildUI();
+            qfd.setObjectName("QFD_" + q.getIndex());
+            gb.layout().addWidget(qfd);
+        }
+
+    }
+
+    void longForm() {
+        QGroupBox gb = ((QGroupBox)((QScrollArea) children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get())
+                .children().stream().findFirst().get()
+                .children().stream().findFirst().get());
+        gb.children().stream().forEach(i -> i.dispose());
+
+        QVBoxLayout vboxLayout = new QVBoxLayout();
+        vboxLayout.setObjectName("VBoxLayout");
+        gb.setLayout(vboxLayout);
+
+        for(QuestionData.Question q : new QuestionData().getQuestions())
+        {
+            QuestionFormData qfd = new QuestionFormData(this);
+            qfd.setText(q.getText());
+            qfd.setIndex(q.getIndex());
+            qfd.buildUI();
+            qfd.setObjectName("QFD_" + q.getIndex());
+            gb.layout().addWidget(qfd);
+        }
     }
 }

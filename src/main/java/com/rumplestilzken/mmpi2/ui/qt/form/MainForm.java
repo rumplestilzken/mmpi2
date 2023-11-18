@@ -47,7 +47,7 @@ public class MainForm extends Form {
                 .filter(i -> i.objectName().equals("Next")).findFirst().get()
         )).hide();
 //        ((MainForm)parent).setCurrentForm(new QuestionForm(null));
-        System.out.println(children().stream().count());
+//        System.out.println(children().stream().count());
 
 
 //        System.out.println("Next");

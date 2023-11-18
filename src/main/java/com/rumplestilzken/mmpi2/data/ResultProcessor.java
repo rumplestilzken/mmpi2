@@ -5,6 +5,8 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class ResultProcessor {
+    boolean isMale = false;
+    boolean isFemale = false;
 
     public JSONObject getJSONFromAnswers(List<QuestionData.QuestionAnswerData> answers) {
         JSONObject answerObject = new JSONObject();
