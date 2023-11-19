@@ -186,18 +186,8 @@ public class QuestionForm extends Form{
             answers.add(new QuestionData.QuestionAnswerData(i+1, answer));
         }
 
-        long isTrue = answers.stream().filter(i -> i.getAnswer() == Boolean.TRUE).count();
-        long isFalse = answers.stream().filter(i -> i.getAnswer() == Boolean.FALSE).count();
-        long isUnaswered = answers.stream().filter(i -> i.getAnswer() == null).count();
-
-        System.out.println("TRUE Count:" + Long.toString(isTrue));
-        System.out.println("FALSE Count:" + Long.toString(isFalse));
-        System.out.println("UNASWERED Count:" + Long.toString(isUnaswered));
-
-
-        ResultProcessor rp = new ResultProcessor();
-        JSONObject jo = rp.getJSONFromAnswers(answers);
-        System.out.println(jo.toString());
+        ResultProcessor rp = new ResultProcessor(male);
+        System.out.println(rp.getJSONFromAnswers(answers));
     }
 
     void shortForm() {
