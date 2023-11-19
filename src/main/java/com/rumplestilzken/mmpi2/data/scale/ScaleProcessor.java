@@ -5,10 +5,12 @@ import com.rumplestilzken.mmpi2.data.QuestionData;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 public class ScaleProcessor {
 
     Map<Integer, Boolean> answerMap = new HashMap<>();
+    String[] ignoreList = { "True", "False", "VRIN", "TRIN", "?" };
 
     public void process(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList, boolean isMale) {
         answers.forEach(i -> answerMap.put(i.getIndex(), i.getAnswer()));
@@ -19,23 +21,61 @@ public class ScaleProcessor {
         processVRIN(answers, scaleList);
         processTRIN(answers, scaleList);
 
-        processCommon(K.class, answers, scaleList, isMale);
+        scaleList.stream().filter(i -> !List.of(ignoreList).contains(i.toString())).forEach(i -> processCommonRawScore(i.getClass(), answers, scaleList, isMale));
 
-        processCommon(F.class, answers, scaleList, isMale);
+        processCorrections(answers, scaleList, isMale);
     }
 
-    private void processCommon(Class clazz, List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList, boolean isMale) {
+    private String getCorrectedScore(K k, List<String> tScale, Scale currentScale)
+    {
+        if(tScale.get(0).equals(""))
+        {
+            return tScale.get(Math.toIntExact(currentScale.rawScore + 1));
+        }
+
+        long kValue = currentScale.rawScore;
+        double kScore = kValue*Double.parseDouble(tScale.get(0))+currentScale.rawScore;
+        double actualKScore = Math.floor(kScore+.5);
+        int tScore = Integer.parseInt(tScale.get((int)actualKScore));
+        return Integer.toString(tScore);
+    }
+
+    private void processCorrections(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList, boolean isMale) {
+        K kScale = (K) scaleList.stream().filter(i -> i instanceof K).findFirst().get();
+        scaleList.forEach(currentScale -> {
+            if(currentScale instanceof K || List.of(ignoreList).contains(currentScale.toString())) {
+                return;
+            }
+
+            for (String currentIndex: currentScale.getTrueQuestions()) {
+                if(!kScale.getTrueQuestions().contains(currentIndex))
+                {
+                    continue;
+                }
+                currentScale.settScore(getCorrectedScore(kScale, isMale ? currentScale.getMaleTScale() : currentScale.getFemaleTScale(), currentScale));
+            }
+
+            for (String currentIndex: currentScale.getFalseQuestions()) {
+                if(!kScale.getFalseQuestions().contains(currentIndex))
+                {
+                    continue;
+                }
+                currentScale.settScore(getCorrectedScore(kScale, isMale ? currentScale.getMaleTScale() : currentScale.getFemaleTScale(), currentScale));
+            }
+        });
+    }
+
+    private void processCommonRawScore(Class clazz, List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList, boolean isMale) {
         Scale currentScale = (Scale) scaleList.stream().filter(clazz::isInstance).findFirst().get();
-        System.out.println(currentScale.toString());
         for (String currentIndex: currentScale.getTrueQuestions()) {
-            QuestionData.QuestionAnswerData currentQAD = answers.stream().filter(i -> i.getIndex() == Integer.parseInt(currentIndex)).findFirst().get();
-            if(currentQAD.getAnswer() != null && currentQAD.getAnswer()) {
+            Boolean bool = answerMap.get(Integer.parseInt(currentIndex));
+            if(bool != null && bool) {
                 currentScale.incrementRawScore();
             }
         }
         for (String currentIndex: currentScale.getFalseQuestions()) {
-            QuestionData.QuestionAnswerData currentQAD = answers.stream().filter(i -> i.getIndex() == Integer.parseInt(currentIndex)).findFirst().get();
-            if(currentQAD.getAnswer() != null && !currentQAD.getAnswer()) {
+            Boolean bool = answerMap.get(Integer.parseInt(currentIndex));
+            if(bool != null && !bool) {
                 currentScale.incrementRawScore();
             }
         }
@@ -48,9 +88,7 @@ public class ScaleProcessor {
             tScale = currentScale.getFemaleTScale();
         }
 
-        currentScale.settScore(tScale.get(Integer.parseInt(String.valueOf(currentScale.rawScore+1))));
-
-
+//        currentScale.settScore(tScale.get(Integer.parseInt(String.valueOf(currentScale.rawScore+1))));
     }
 
 

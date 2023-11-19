@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Scale {
     public Scale() {
-        settScore("undefined");
         setRawScore(0);
     }
 

@@ -17,7 +17,7 @@ public class F extends Scale {
     @Override
     public List<String> getMaleTScale() {
         List<String> list = super.getMaleTScale();
-        list.add("undefined");
+        list.add("");
         list.add("36");
         list.add("39");
         list.add("42");
@@ -53,7 +53,7 @@ public class F extends Scale {
     @Override
     public List<String> getFemaleTScale() {
         List<String> list = super.getFemaleTScale();
-        list.add("undefined");
+        list.add("");
         list.add("37");
         list.add("41");
         list.add("44");
@@ -83,7 +83,7 @@ public class F extends Scale {
     }
 
     public List<String> getFalseQuestions() {
-        List<String> list = super.getTrueQuestions();
+        List<String> list = super.getFalseQuestions();
         list.add("6");
         list.add("12");
         list.add("78");

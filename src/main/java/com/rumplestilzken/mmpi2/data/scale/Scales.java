@@ -12,6 +12,12 @@ public class Scales {
         scales.add(new VRIN());
         scales.add(new TRIN());
         scales.add(new F());
+        scales.add(new Fb());
+        scales.add(new Fp());
+        scales.add(new L());
+        scales.add(new K());
+        scales.add(new S());
+        scales.add(new Hs());
         scales.add(new D());
         scales.add(new Hy());
         scales.add(new Pd());
