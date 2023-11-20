@@ -26,7 +26,7 @@ public class ResultProcessor {
         List<Scale> scaleList = Scales.getScales();
 
         ScaleProcessor sp = new ScaleProcessor();
-        sp.process(answers, scaleList, isMale);
+        answerObject.put("Profile Evaluation", sp.process(answers, scaleList, isMale));
 
         scaleList.stream().forEachOrdered(i -> {
             JSONObject scale = new JSONObject();
@@ -45,8 +45,6 @@ public class ResultProcessor {
             answerWrapper.put(Integer.toString(answer.getIndex()), answer.getAnswer() == null ? "?" : answer.getAnswer());
         }
         answerObject.put("Answers", answerWrapper);
-
-        answerObject.put("Profile Evaluation", ""); // TODO: PE
 
         ObjectMapper objectMapper = new ObjectMapper();
         Object jsonObject = null;

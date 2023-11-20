@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class ScaleProcessor {
 
     Map<Integer, Boolean> answerMap = new HashMap<>();
-    String[] ignoreList = { "True", "False", "VRIN", "TRIN", "?" };
+    String[] ignoreList = { "True", "False", "?" };
 
-    public void process(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList, boolean isMale) {
+    public double process(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList, boolean isMale) {
         answers.forEach(i -> answerMap.put(i.getIndex(), i.getAnswer()));
 
         processTrueScale(answers, scaleList);
@@ -21,22 +21,42 @@ public class ScaleProcessor {
         processVRIN(answers, scaleList);
         processTRIN(answers, scaleList);
 
-        scaleList.stream().filter(i -> !List.of(ignoreList).contains(i.toString())).forEach(i -> processCommonRawScore(i.getClass(), answers, scaleList, isMale));
+        scaleList.stream().filter(i -> !List.of(ignoreList).contains(i.toString())).forEach(i -> processCommonRawScore(i.getClass(), answers, scaleList));
 
         processCorrections(answers, scaleList, isMale);
+
+        List<String> peScalesList = new ArrayList<>();
+        peScalesList.add("Hs");
+        peScalesList.add("D");
+        peScalesList.add("Hy");
+        peScalesList.add("Pd");
+        peScalesList.add("Pa");
+        peScalesList.add("Pt");
+        peScalesList.add("Sc");
+        peScalesList.add("Ma");
+
+        double peScale = 0;
+        List<Scale> peScales = scaleList.stream().filter(i -> peScalesList.contains(i.toString())).toList();
+        for (Scale currentScale : peScales) {
+            peScale += Double.parseDouble(currentScale.gettScore().isEmpty() ? "0" : currentScale.gettScore());
+        }
+        return peScale/8;
     }
 
-    private String getCorrectedScore(K k, List<String> tScale, Scale currentScale)
+    private String getTScore(K k, List<String> tScale, Scale currentScale)
     {
         if(tScale.get(0).equals(""))
         {
             return tScale.get(Math.toIntExact(currentScale.rawScore + 1));
         }
 
-        long kValue = currentScale.rawScore;
+        long kValue = k.rawScore;
         double kScore = kValue*Double.parseDouble(tScale.get(0))+currentScale.rawScore;
         double actualKScore = Math.floor(kScore+.5);
-        int tScore = Integer.parseInt(tScale.get((int)actualKScore));
+        int tScore = Integer.parseInt(tScale.get((int)actualKScore + 1));
+
+        currentScale.setkScore((long)actualKScore);
+
         return Integer.toString(tScore);
     }
 
@@ -52,7 +72,7 @@ public class ScaleProcessor {
                 {
                     continue;
                 }
-                currentScale.settScore(getCorrectedScore(kScale, isMale ? currentScale.getMaleTScale() : currentScale.getFemaleTScale(), currentScale));
+                currentScale.settScore(getTScore(kScale, isMale ? currentScale.getMaleTScale() : currentScale.getFemaleTScale(), currentScale));
             }
 
             for (String currentIndex: currentScale.getFalseQuestions()) {
@@ -60,12 +80,12 @@ public class ScaleProcessor {
                 {
                     continue;
                 }
-                currentScale.settScore(getCorrectedScore(kScale, isMale ? currentScale.getMaleTScale() : currentScale.getFemaleTScale(), currentScale));
+                currentScale.settScore(getTScore(kScale, isMale ? currentScale.getMaleTScale() : currentScale.getFemaleTScale(), currentScale));
             }
         });
     }
 
-    private void processCommonRawScore(Class clazz, List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList, boolean isMale) {
+    private void processCommonRawScore(Class clazz, List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList) {
         Scale currentScale = (Scale) scaleList.stream().filter(clazz::isInstance).findFirst().get();
         for (String currentIndex: currentScale.getTrueQuestions()) {
             Boolean bool = answerMap.get(Integer.parseInt(currentIndex));
@@ -79,16 +99,6 @@ public class ScaleProcessor {
                 currentScale.incrementRawScore();
             }
         }
-
-        List<String> tScale = null;
-        if(isMale) {
-            tScale = currentScale.getMaleTScale();
-        }
-        else {
-            tScale = currentScale.getFemaleTScale();
-        }
-
-//        currentScale.settScore(tScale.get(Integer.parseInt(String.valueOf(currentScale.rawScore+1))));
     }
 
 
