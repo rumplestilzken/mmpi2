@@ -2,6 +2,8 @@ package com.rumplestilzken.mmpi2.data;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfDocument;
 import com.rumplestilzken.mmpi2.data.scale.Scale;
 import com.rumplestilzken.mmpi2.data.scale.ScaleProcessor;
 import com.rumplestilzken.mmpi2.data.scale.Scales;
@@ -29,15 +31,15 @@ public class ResultProcessor {
         answerObject.put("Profile Evaluation", sp.process(answers, scaleList, isMale));
 
         scaleList.stream().forEachOrdered(i -> {
-            JSONObject scale = new JSONObject();
+//            JSONObject scale = new JSONObject();
             Map<String, String> map = new HashMap<>();
             map.put("description", i.getDescription());
             map.put("rawScore", Long.toString(i.getRawScore()));
             map.put("kScore", Long.toString(i.getkScore()));
             map.put("tScore", i.gettScore());
-            map.put("Index", Integer.toString(i.getIndex()));
-            scale.put(i.toString(), map);
-            scales.put(i.toString(), scale);
+            map.put("index", Integer.toString(i.getIndex()));
+//            scale.put(i.toString(), map);
+            scales.put(i.toString(), map);
         });
         answerObject.put("scales", scales);
 
@@ -58,5 +60,14 @@ public class ResultProcessor {
         }
 
         return prettyPrint;
+    }
+
+    public Document getPDFDocument(List<QuestionData.QuestionAnswerData> answers) {
+        List<Scale> scaleList = Scales.getScales();
+
+        ScaleProcessor sp = new ScaleProcessor();
+        double profileEvaluation = sp.process(answers, scaleList, isMale);
+        Document document = new PdfDocument();
+        return document;
     }
 }

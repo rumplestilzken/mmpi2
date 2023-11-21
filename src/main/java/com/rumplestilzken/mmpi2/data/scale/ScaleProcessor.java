@@ -25,7 +25,7 @@ public class ScaleProcessor {
         processVRIN(answers, scaleList);
         processTRIN(answers, scaleList);
 
-        scaleList.stream().filter(i -> !List.of(ignoreList).contains(i.toString())).forEach(i -> processCommonRawScore(i.getClass(), answers, scaleList));
+        scaleList.stream().filter(i -> !List.of(ignoreList).contains(i.toString())).forEach(i -> processRawScore(i.getClass(), answers, scaleList));
 
         processTScores(answers, scaleList, isMale);
 
@@ -89,9 +89,6 @@ public class ScaleProcessor {
     private void processTScores(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList, boolean isMale) {
         K kScale = (K) scaleList.stream().filter(i -> i instanceof K).findFirst().get();
         scaleList.forEach(currentScale -> {
-            if(currentScale instanceof K) {
-                return;
-            }
 
 //            for (String currentIndex: currentScale.getTrueQuestions()) {
 //                if(!kScale.getTrueQuestions().contains(currentIndex))
@@ -109,12 +106,12 @@ public class ScaleProcessor {
 //                currentScale.settScore(getTScore(kScale, isMale ? currentScale.getMaleTScale() : currentScale.getFemaleTScale(), currentScale));
 //            }
 
-                currentScale.settScore(getTScore(kScale, isMale ? currentScale.getMaleTScale() : currentScale.getFemaleTScale(), currentScale));
+            currentScale.settScore(getTScore(kScale, isMale ? currentScale.getMaleTScale() : currentScale.getFemaleTScale(), currentScale));
         });
 
     }
 
-    private void processCommonRawScore(Class clazz, List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList) {
+    private void processRawScore(Class clazz, List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList) {
         Scale currentScale = (Scale) scaleList.stream().filter(clazz::isInstance).findFirst().get();
         for (String currentIndex: currentScale.getTrueQuestions()) {
             Boolean bool = answerMap.get(Integer.parseInt(currentIndex));
