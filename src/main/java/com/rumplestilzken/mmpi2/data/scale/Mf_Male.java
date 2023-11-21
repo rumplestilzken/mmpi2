@@ -8,6 +8,6 @@ public class Mf_Male extends Scale {
 
     @Override
     public String toString() {
-        return "Mf";
+        return "Mf-m";
     }
 }

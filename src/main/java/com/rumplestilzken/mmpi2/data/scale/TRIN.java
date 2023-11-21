@@ -19,6 +19,58 @@ public class TRIN extends Scale {
         return "TRIN";
     }
 
+    @Override
+    public List<String> getMaleTScale() {
+        List<String> list = super.getMaleTScale();
+        list.add("114F");
+        list.add("107F");
+        list.add("99F");
+        list.add("92F");
+        list.add("85F");
+        list.add("78F");
+        list.add("71F");
+        list.add("64F");
+        list.add("57F");
+        list.add("50");
+        list.add("57T");
+        list.add("65T");
+        list.add("72T");
+        list.add("79T");
+        list.add("86T");
+        list.add("93T");
+        list.add("100T");
+        list.add("107T");
+        list.add("114T");
+        list.add("120T");
+        return list;
+    }
+
+    @Override
+    public List<String> getFemaleTScale() {
+        List<String> list = super.getFemaleTScale();
+        list.add("118F");
+        list.add("111F");
+        list.add("103F");
+        list.add("95F");
+        list.add("88F");
+        list.add("80F");
+        list.add("73F");
+        list.add("65F");
+        list.add("58F");
+        list.add("50");
+        list.add("58T");
+        list.add("65T");
+        list.add("73T");
+        list.add("80T");
+        list.add("88T");
+        list.add("95T");
+        list.add("103T");
+        list.add("111T");
+        list.add("118T");
+        list.add("120T");
+        return list;
+    }
+
     public static List<RINPair> getTRINPairs() {
         List<RINPair> pairs = new ArrayList<>();
         pairs.add(new RINPair(3,true,39,true,1));

@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Fixed Test Data, completed one or two scales.">
+    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Working K Score Correction Values">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/ResultProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/ResultProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/Pd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/Pd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/Fb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/Fb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/Fp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/Fp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/L.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/L.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/Scale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/Scale.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/ScaleProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/ScaleProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/TRIN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/TRIN.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/VRIN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/VRIN.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700411088691</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Working K Score Correction Values">
+      <option name="closed" value="true" />
+      <created>1700506331219</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1700506331219</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -206,6 +219,7 @@
     <MESSAGE value="More questions work" />
     <MESSAGE value="Scales created." />
     <MESSAGE value="Fixed Test Data, completed one or two scales." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Test Data, completed one or two scales." />
+    <MESSAGE value="Working K Score Correction Values" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working K Score Correction Values" />
   </component>
 </project>

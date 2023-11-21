@@ -35,6 +35,7 @@ public class ResultProcessor {
             map.put("rawScore", Long.toString(i.getRawScore()));
             map.put("kScore", Long.toString(i.getkScore()));
             map.put("tScore", i.gettScore());
+            map.put("Index", Integer.toString(i.getIndex()));
             scale.put(i.toString(), map);
             scales.put(i.toString(), scale);
         });

@@ -18,6 +18,67 @@ public class VRIN extends Scale {
         return "VRIN";
     }
 
+    @Override
+    public List<String> getMaleTScale() {
+        List<String> list = super.getMaleTScale();
+        list.add("31");
+        list.add("34");
+        list.add("38");
+        list.add("42");
+        list.add("46");
+        list.add("50");
+        list.add("54");
+        list.add("57");
+        list.add("61");
+        list.add("65");
+        list.add("69");
+        list.add("73");
+        list.add("76");
+        list.add("80");
+        list.add("84");
+        list.add("88");
+        list.add("92");
+        list.add("96");
+        list.add("99");
+        list.add("103");
+        list.add("107");
+        list.add("111");
+        list.add("115");
+        list.add("118");
+        list.add("120");
+        return list;
+    }
+
+    @Override
+    public List<String> getFemaleTScale() {
+        List<String> list = super.getFemaleTScale();
+        list.add("30");
+        list.add("34");
+        list.add("38");
+        list.add("42");
+        list.add("46");
+        list.add("50");
+        list.add("54");
+        list.add("58");
+        list.add("62");
+        list.add("66");
+        list.add("70");
+        list.add("74");
+        list.add("78");
+        list.add("82");
+        list.add("86");
+        list.add("90");
+        list.add("94");
+        list.add("98");
+        list.add("102");
+        list.add("106");
+        list.add("110");
+        list.add("114");
+        list.add("118");
+        list.add("120");
+        return list;
+    }
+
     public static List<RINPair> getVRINPairs() {
         List<RINPair> pairs = new ArrayList<>();
         pairs.add(new RINPair(3, true, 39, true, 1));
