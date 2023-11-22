@@ -153,8 +153,11 @@ public class QuestionForm extends Form{
                 {
                     qfd.getTrueRadio().setChecked(true);
                 }
-                else {
+                else if (currentChar == 'F') {
                     qfd.getFalseRadio().setChecked(true);
+                }
+                else {
+                    //Do Nothing
                 }
             }
             catch (Exception e) {
@@ -164,8 +167,6 @@ public class QuestionForm extends Form{
     }
 
     void saveResults() {
-        QGridLayout layout = (QGridLayout)layout();
-
         QGroupBox gb = ((QGroupBox)children().stream().filter(i -> i.getObjectName().equals("TopGroupBox")).findFirst().get());
         QGroupBox mfgb = (QGroupBox) gb.children().stream().filter(i -> i.getObjectName().equals("MFGB")).findFirst().get();
         QRadioButton mRadio = (QRadioButton)mfgb.children().stream().filter(i -> i.getObjectName().equals("MaleRadioButton")).findFirst().get();
@@ -175,14 +176,11 @@ public class QuestionForm extends Form{
 
         ResultProcessor rp = new ResultProcessor(male);
         boolean success = rp.writePDFDocument(answers, "/home/nick/dev/tmp/MMPI2.pdf");
-
     }
 
     List<QuestionData.QuestionAnswerData> getAnswers(){
         List<QObject> objects = new ArrayList<QObject>();
         List<QuestionData.QuestionAnswerData> answers = new ArrayList<QuestionData.QuestionAnswerData>();
-
-
 
         objects.addAll(((QScrollArea) children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get())
                 .children().stream().findFirst().get()

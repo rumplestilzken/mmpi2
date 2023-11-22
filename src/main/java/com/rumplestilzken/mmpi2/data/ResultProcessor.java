@@ -8,6 +8,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.rumplestilzken.mmpi2.data.scale.*;
+import io.qt.widgets.QLineEdit;
 import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
@@ -131,10 +132,17 @@ public class ResultProcessor {
             table.addCell(tScore);
 
             table.setHeaderRows(1);
+            table.setWidths(new int[] {50, 230, 50, 50, 60});
 
             scaleList.forEach(currentScale -> {
                 boolean modify = currentScale instanceof True || currentScale instanceof False || currentScale instanceof QuestionScale;
-                table.addCell(currentScale.toString());
+
+                String scaleId = currentScale.toString();
+                if(currentScale.toString().startsWith("Mf"))
+                {
+                    scaleId = "Mf";
+                }
+                table.addCell(scaleId);
 
                 if(modify)
                 {
@@ -158,9 +166,31 @@ public class ResultProcessor {
 
             });
 
-//            section.add(table);
-
             document.add(table);
+
+            document.newPage();
+
+            Paragraph peParagraph = new Paragraph("Profile Evaluation: " + profileEvaluation);
+            document.add(peParagraph);
+
+            StringBuilder answerString = new StringBuilder();
+            for(int i = 0; i < answers.size()-1; i++){
+                QuestionData.QuestionAnswerData a = answers.get(i);
+                if(a == null) {
+                    answerString.append("?");
+                }
+                else if(a.getAnswer()) {
+                    answerString.append("T");
+                }
+                else if (!a.getAnswer()) {
+                    answerString.append("F");
+                }
+            }
+
+            Paragraph answerSummaryParagraph = new Paragraph("Answer Summary");
+            Paragraph answerParagraph = new Paragraph(answerString.toString());
+            document.add(answerSummaryParagraph);
+            document.add(answerParagraph);
 
             document.close();
         } catch (DocumentException e) {

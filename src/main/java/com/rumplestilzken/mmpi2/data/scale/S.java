@@ -5,7 +5,7 @@ import java.util.List;
 public class S extends Scale {
     @Override
     public String getDescription() {
-        return "Superlativee Self-Presentation";
+        return "Superlative Self-Presentation";
     }
 
     @Override

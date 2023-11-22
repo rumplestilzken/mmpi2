@@ -27,22 +27,17 @@ public class D2 extends Scale {
     @Override
     public List<String> getFalseQuestions() {
         List<String> list = super.getFalseQuestions();
-        list.add("");
-        list.add("");
-        list.add("30");
-        list.add("32");
+        list.add("9");
+        list.add("29");
         list.add("37");
-        list.add("43");
-        list.add("48");
-        list.add("54");
-        list.add("59");
-        list.add("65");
-        list.add("70");
+        list.add("49");
+        list.add("55");
         list.add("76");
-        list.add("81");
-        list.add("87");
-        list.add("92");
-        list.add("98");
+        list.add("134");
+        list.add("188");
+        list.add("189");
+        list.add("212");
+
         return list;
     }
 
@@ -87,7 +82,6 @@ public class D2 extends Scale {
         list.add("84");
         list.add("90");
         list.add("95");
-
         return list;
     }
 }
