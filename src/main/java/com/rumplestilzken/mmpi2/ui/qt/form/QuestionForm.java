@@ -1,17 +1,18 @@
 package com.rumplestilzken.mmpi2.ui.qt.form;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.rumplestilzken.mmpi2.data.QuestionData;
 import com.rumplestilzken.mmpi2.data.ResultProcessor;
 import io.qt.core.QObject;
 import io.qt.core.Qt;
 import io.qt.widgets.*;
-import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 
 public class QuestionForm extends Form{
     public QuestionForm(QWidget parent) {
@@ -29,6 +30,9 @@ public class QuestionForm extends Form{
 
         ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("LoadAnswers")).findFirst().get()
                 .triggered.connect(this, "loadAnswers()");
+
+        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SaveResults")).findFirst().get()
+                .triggered.connect(this, "saveResults()");
 
         QGridLayout layout = (QGridLayout)layout();
         layout.setObjectName("Layout");
@@ -159,18 +163,26 @@ public class QuestionForm extends Form{
         }
     }
 
-    void getResults() {
+    void saveResults() {
         QGridLayout layout = (QGridLayout)layout();
-
-        List<QObject> objects = new ArrayList<QObject>();
-        List<QuestionData.QuestionAnswerData> answers = new ArrayList<QuestionData.QuestionAnswerData>();
 
         QGroupBox gb = ((QGroupBox)children().stream().filter(i -> i.getObjectName().equals("TopGroupBox")).findFirst().get());
         QGroupBox mfgb = (QGroupBox) gb.children().stream().filter(i -> i.getObjectName().equals("MFGB")).findFirst().get();
         QRadioButton mRadio = (QRadioButton)mfgb.children().stream().filter(i -> i.getObjectName().equals("MaleRadioButton")).findFirst().get();
-        QRadioButton fRadio = (QRadioButton)mfgb.children().stream().filter(i -> i.getObjectName().equals("FemaleRadioButton")).findFirst().get();
         boolean male = mRadio.isChecked();
-        boolean female = fRadio.isChecked();
+
+        List<QuestionData.QuestionAnswerData> answers = getAnswers();
+
+        ResultProcessor rp = new ResultProcessor(male);
+        boolean success = rp.writePDFDocument(answers, "/home/nick/dev/tmp/MMPI2.pdf");
+
+    }
+
+    List<QuestionData.QuestionAnswerData> getAnswers(){
+        List<QObject> objects = new ArrayList<QObject>();
+        List<QuestionData.QuestionAnswerData> answers = new ArrayList<QuestionData.QuestionAnswerData>();
+
+
 
         objects.addAll(((QScrollArea) children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get())
                 .children().stream().findFirst().get()
@@ -185,6 +197,16 @@ public class QuestionForm extends Form{
             if (((QuestionFormData)widget).getFalseRadio().isChecked()) answer = Boolean.FALSE;
             answers.add(new QuestionData.QuestionAnswerData(i+1, answer));
         }
+        return answers;
+    }
+
+    void getResults() {
+        List<QuestionData.QuestionAnswerData> answers = getAnswers();
+
+        QGroupBox gb = ((QGroupBox)children().stream().filter(i -> i.getObjectName().equals("TopGroupBox")).findFirst().get());
+        QGroupBox mfgb = (QGroupBox) gb.children().stream().filter(i -> i.getObjectName().equals("MFGB")).findFirst().get();
+        QRadioButton mRadio = (QRadioButton)mfgb.children().stream().filter(i -> i.getObjectName().equals("MaleRadioButton")).findFirst().get();
+        boolean male = mRadio.isChecked();
 
         ResultProcessor rp = new ResultProcessor(male);
         System.out.println(rp.getJSONFromAnswers(answers));

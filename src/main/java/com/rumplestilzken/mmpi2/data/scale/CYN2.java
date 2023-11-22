@@ -3,7 +3,7 @@ package com.rumplestilzken.mmpi2.data.scale;
 public class CYN2 extends Scale {
     @Override
     public String getDescription() {
-        return "Interpersional Suspiciousness";
+        return "Interpersonal Suspiciousness";
     }
 
     @Override

@@ -5,7 +5,7 @@ import java.util.List;
 public class Pd extends Scale {
     @Override
     public String getDescription() {
-        return "Psychopatic Deviate";
+        return "Psychopathic Deviate";
     }
 
     @Override
