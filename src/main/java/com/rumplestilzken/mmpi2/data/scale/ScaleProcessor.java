@@ -5,6 +5,8 @@ import com.rumplestilzken.mmpi2.data.QuestionData;
 import java.util.*;
 import java.util.function.Consumer;
 
+import static java.util.stream.Collectors.toList;
+
 public class ScaleProcessor {
 
     Map<Integer, Boolean> answerMap = new HashMap<>();
@@ -28,16 +30,9 @@ public class ScaleProcessor {
         processTScores(answers, scaleList, isMale);
 
         processCritical(answers, criticalScales);
-        
-        List<String> peScalesList = new ArrayList<>();
-        peScalesList.add("Hs");
-        peScalesList.add("D");
-        peScalesList.add("Hy");
-        peScalesList.add("Pd");
-        peScalesList.add("Pa");
-        peScalesList.add("Pt");
-        peScalesList.add("Sc");
-        peScalesList.add("Ma");
+
+        String[] peScalesArray = new String[] {"Hs", "D", "Hy", "Pd", "Pa", "Pt", "Sc", "Ma"};
+        List<String> peScalesList = List.of(peScalesArray);
 
         double peScale = 0;
         List<Scale> peScales = scaleList.stream().filter(i -> peScalesList.contains(i.toString())).toList();
@@ -57,8 +52,8 @@ public class ScaleProcessor {
 
     public void processCritical(List<QuestionData.QuestionAnswerData> answers, List<CriticalScale> criticalScales) {
         criticalScales.forEach(currentScale -> {
-            List<String> trueValues = currentScale.getTrueQuestions().stream().filter(currentQuestion -> answers.stream().filter(i -> i.getIndex() == Integer.parseInt(currentQuestion) && i.getAnswer() == Boolean.TRUE).count() > 0).toList();
-            List<String> falseValues = currentScale.getFalseQuestions().stream().filter(currentQuestion -> answers.stream().filter(i -> i.getIndex() == Integer.parseInt(currentQuestion) && i.getAnswer() == Boolean.FALSE).count() > 0).toList();
+            List<String> trueValues = currentScale.getTrueQuestions().stream().filter(currentQuestion -> answerMap.get(currentQuestion) == Boolean.TRUE).toList();
+            List<String> falseValues = currentScale.getFalseQuestions().stream().filter(currentQuestion -> answerMap.get(currentQuestion) == Boolean.FALSE).toList();
             boolean t = trueValues.stream().count() > 0;
             boolean f =  falseValues.stream().count() > 0;
             if(t || f) {
@@ -71,7 +66,7 @@ public class ScaleProcessor {
 
     private String getTScore(K k, List<String> tScale, Scale currentScale)
     {
-        if(tScale.size() == 0)
+        if(tScale.isEmpty())
         {
             return "undefined";
         }
