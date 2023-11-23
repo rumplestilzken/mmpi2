@@ -9,6 +9,7 @@ import io.qt.core.QObject;
 import io.qt.core.Qt;
 import io.qt.widgets.*;
 
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -24,15 +25,20 @@ public class QuestionForm extends Form{
         super.buildUI();
 
         QMainWindow mainWindow = (QMainWindow) parent;
-        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("LoadAnswers")).findFirst().get().setEnabled(true);
-        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SaveResults")).findFirst().get().setEnabled(true);
-        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SaveQuestions")).findFirst().get().setEnabled(true);
 
-        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("LoadAnswers")).findFirst().get()
-                .triggered.connect(this, "loadAnswers()");
+        ((QMenu)mainWindow.menuBar().findChild("File")).clear();
 
-        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SaveResults")).findFirst().get()
-                .triggered.connect(this, "saveResults()");
+        QAction loadQuestionsAction = new QAction("Load Answers From JSON");
+        loadQuestionsAction.triggered.connect(this, "loadAnswers()");
+        ((QMenu)mainWindow.menuBar().findChild("File")).addAction(loadQuestionsAction);
+
+        QAction saveJSONAction = new QAction("Save JSON");
+        saveJSONAction.triggered.connect(this, "getResults()");
+        ((QMenu)mainWindow.menuBar().findChild("File")).addAction(saveJSONAction);
+
+        QAction savePDFAction = new QAction("Save PDF");
+        savePDFAction.triggered.connect(this, "savePDFResults()");
+        ((QMenu)mainWindow.menuBar().findChild("File")).addAction(savePDFAction);
 
         QGridLayout layout = (QGridLayout)layout();
         layout.setObjectName("Layout");
@@ -125,9 +131,9 @@ public class QuestionForm extends Form{
 
         layout.addWidget(questionsScroll);
 
-        QPushButton getResultsButton = new QPushButton("Get Results");
-        getResultsButton.released.connect(this, "getResults()");
-        layout.addWidget(getResultsButton, 0, 2, Qt.AlignmentFlag.AlignTop);
+//        QPushButton getResultsButton = new QPushButton("Get Results");
+//        getResultsButton.released.connect(this, "getResults()");
+//        layout.addWidget(getResultsButton, 0, 2, Qt.AlignmentFlag.AlignTop);
     }
 
     void loadAnswers() {
@@ -166,7 +172,7 @@ public class QuestionForm extends Form{
         }
     }
 
-    void saveResults() {
+    void savePDFResults() {
         QGroupBox gb = ((QGroupBox)children().stream().filter(i -> i.getObjectName().equals("TopGroupBox")).findFirst().get());
         QGroupBox mfgb = (QGroupBox) gb.children().stream().filter(i -> i.getObjectName().equals("MFGB")).findFirst().get();
         QRadioButton mRadio = (QRadioButton)mfgb.children().stream().filter(i -> i.getObjectName().equals("MaleRadioButton")).findFirst().get();

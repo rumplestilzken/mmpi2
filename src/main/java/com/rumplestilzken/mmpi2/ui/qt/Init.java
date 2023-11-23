@@ -16,22 +16,9 @@ public class Init {
 
         QMenu fileMenu = window.menuBar().addMenu("File");
         fileMenu.setObjectName("File");
-        QAction loadQuestionAnswersMenuItem = new QAction("Load Question Answers");
-        loadQuestionAnswersMenuItem.setObjectName("LoadAnswers");
-        loadQuestionAnswersMenuItem.setEnabled(false);
-        fileMenu.addAction(loadQuestionAnswersMenuItem);
-
-        QAction saveQuestionAnswersMenuItem = new QAction("Save Question Answers");
-        saveQuestionAnswersMenuItem.setObjectName("SaveQuestions");
-        saveQuestionAnswersMenuItem.setEnabled(false);
-        fileMenu.addAction(saveQuestionAnswersMenuItem);
-
-        QAction saveResultsMenuItem = new QAction("Save Results");
-        saveResultsMenuItem.setObjectName("SaveResults");
-        saveResultsMenuItem.setEnabled(false);
-        fileMenu.addAction(saveResultsMenuItem);
 
         QMenu aboutMenu = window.menuBar().addMenu("About");
+        aboutMenu.setObjectName("About");
 
         window.setCentralWidget(new MainForm(window));
         window.show();

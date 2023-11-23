@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Got application running rotun run(JExec)" />
+    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Set Taskbar Icon">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/ScaleProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/ScaleProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/Init.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/Init.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/QuestionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/QuestionForm.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -356,7 +361,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700736686536</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Set Taskbar Icon">
+      <option name="closed" value="true" />
+      <created>1700736907081</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1700736907081</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -389,6 +402,7 @@
     <MESSAGE value="Updated PFD Page logic and changed to gradle application" />
     <MESSAGE value="Changed version" />
     <MESSAGE value="Got application running rotun run(JExec)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Got application running rotun run(JExec)" />
+    <MESSAGE value="Set Taskbar Icon" />
+    <option name="LAST_COMMIT_MESSAGE" value="Set Taskbar Icon" />
   </component>
 </project>

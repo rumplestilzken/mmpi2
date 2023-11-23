@@ -2,10 +2,8 @@ package com.rumplestilzken.mmpi2.data.scale;
 
 import com.rumplestilzken.mmpi2.data.QuestionData;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.function.Consumer;
 
 public class ScaleProcessor {
 
@@ -22,8 +20,8 @@ public class ScaleProcessor {
         processTrueScale(answers, scaleList);
         processFalseScale(answers, scaleList);
         processQuestionScale(answers, scaleList);
-        processVRIN(answers, scaleList);
-        processTRIN(answers, scaleList);
+        processRIN(VRIN.class, VRIN.getVRINPairs(), answers, scaleList);
+        processRIN(TRIN.class, TRIN.getTRINPairs(), answers, scaleList);
 
         scaleList.stream().filter(i -> !List.of(ignoreList).contains(i.toString())).forEach(i -> processRawScore(i.getClass(), answers, scaleList));
 
@@ -105,26 +103,8 @@ public class ScaleProcessor {
     private void processTScores(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList, boolean isMale) {
         K kScale = (K) scaleList.stream().filter(i -> i instanceof K).findFirst().get();
         scaleList.forEach(currentScale -> {
-
-//            for (String currentIndex: currentScale.getTrueQuestions()) {
-//                if(!kScale.getTrueQuestions().contains(currentIndex))
-//                {
-//                    continue;
-//                }
-//                currentScale.settScore(getTScore(kScale, isMale ? currentScale.getMaleTScale() : currentScale.getFemaleTScale(), currentScale));
-//            }
-//
-//            for (String currentIndex: currentScale.getFalseQuestions()) {
-//                if(!kScale.getFalseQuestions().contains(currentIndex))
-//                {
-//                    continue;
-//                }
-//                currentScale.settScore(getTScore(kScale, isMale ? currentScale.getMaleTScale() : currentScale.getFemaleTScale(), currentScale));
-//            }
-
             currentScale.settScore(getTScore(kScale, isMale ? currentScale.getMaleTScale() : currentScale.getFemaleTScale(), currentScale));
         });
-
     }
 
     private void processRawScore(Class clazz, List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList) {
@@ -142,37 +122,29 @@ public class ScaleProcessor {
             }
         }
     }
-    
-    private void processTRIN(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList) {
-        TRIN trin = (TRIN) scaleList.stream().filter(i -> i instanceof TRIN).findFirst().get();
-        long baseScore = trin.getRawScore();
-        List<RINPair> pairs = TRIN.getTRINPairs();
-        for (RINPair currentPair: pairs) {
-            Boolean answer1 = answers.stream().filter(i -> i.getIndex() == currentPair.getIndex1()).findFirst().get().getAnswer();
-            Boolean answer2 = answers.stream().filter(i -> i.getIndex() == currentPair.getIndex2()).findFirst().get().getAnswer();
-//            System.out.println("Index1:" + currentPair.index1 + ",Answer1:" + answer1 + ",Index2:" + currentPair.getIndex2() + ",Answer2:" + answer2);
-            if(answer1 == currentPair.isBool1() && answer2 == currentPair.isBool2())
-            {
-                baseScore += currentPair.getValue();
-            }
-        }
-        trin.setRawScore(baseScore);
-    }
 
-    private void processVRIN(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList) {
-        VRIN vrin = (VRIN) scaleList.stream().filter(i -> i instanceof VRIN).findFirst().get();
-        long baseScore = vrin.getRawScore();
-        List<RINPair> pairs = VRIN.getVRINPairs();
-        for (RINPair currentPair: pairs) {
-            Boolean answer1 = answers.stream().filter(i -> i.getIndex() == currentPair.getIndex1()).findFirst().get().getAnswer();
-            Boolean answer2 = answers.stream().filter(i -> i.getIndex() == currentPair.getIndex2()).findFirst().get().getAnswer();
+    private void processRIN(Class clazz, List<RINPair> rinPairs, List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList) {
+        Scale rin = scaleList.stream().filter(clazz::isInstance).findFirst().get();
+        long baseScore = rin.getRawScore();
+        for (RINPair currentPair: rinPairs) {
+            Optional<QuestionData.QuestionAnswerData> q1O = answers.stream().filter(i -> i.getIndex() == currentPair.getIndex1()).findFirst();
+            if(!q1O.isPresent())
+            {
+                continue;
+            }
+            Optional<QuestionData.QuestionAnswerData> q2O = answers.stream().filter(i -> i.getIndex() == currentPair.getIndex2()).findFirst();
+            if(!q2O.isPresent())
+            {
+                continue;
+            }
+
 //            System.out.println("Index1:" + currentPair.index1 + ",Answer1:" + answer1 + ",Index2:" + currentPair.getIndex2() + ",Answer2:" + answer2);
-            if(answer1 == currentPair.isBool1() && answer2 == currentPair.isBool2())
+            if(q1O.get().getAnswer() == currentPair.isBool1() && q2O.get().getAnswer() == currentPair.isBool2())
             {
                 baseScore += currentPair.getValue();
             }
         }
-        vrin.setRawScore(baseScore);
+        rin.setRawScore(baseScore);
     }
 
     private void processTrueScale(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList) {
