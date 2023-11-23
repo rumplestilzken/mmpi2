@@ -119,7 +119,7 @@ public class ResultProcessor {
         StringBuilder answerString = new StringBuilder();
         for(int i = 0; i < answers.size()-1; i++){
             QuestionData.QuestionAnswerData a = answers.get(i);
-            if(a == null) {
+            if(a.getAnswer() == null) {
                 answerString.append("?");
             }
             else if(a.getAnswer()) {

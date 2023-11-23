@@ -52,8 +52,8 @@ public class ScaleProcessor {
 
     public void processCritical(List<QuestionData.QuestionAnswerData> answers, List<CriticalScale> criticalScales) {
         criticalScales.forEach(currentScale -> {
-            List<String> trueValues = currentScale.getTrueQuestions().stream().filter(currentQuestion -> answerMap.get(currentQuestion) == Boolean.TRUE).toList();
-            List<String> falseValues = currentScale.getFalseQuestions().stream().filter(currentQuestion -> answerMap.get(currentQuestion) == Boolean.FALSE).toList();
+            List<String> trueValues = currentScale.getTrueQuestions().stream().filter(currentQuestion -> answers.stream().filter(i -> i.getIndex() == Integer.parseInt(currentQuestion) && i.getAnswer() == Boolean.TRUE).count() > 0).toList();
+            List<String> falseValues = currentScale.getFalseQuestions().stream().filter(currentQuestion -> answers.stream().filter(i -> i.getIndex() == Integer.parseInt(currentQuestion) && i.getAnswer() == Boolean.FALSE).count() > 0).toList();
             boolean t = trueValues.stream().count() > 0;
             boolean f =  falseValues.stream().count() > 0;
             if(t || f) {
