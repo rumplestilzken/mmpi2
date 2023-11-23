@@ -92,7 +92,11 @@ public class ScaleProcessor {
         long kValue = k.rawScore;
         double kScore = kValue*Double.parseDouble(tScale.get(0))+currentScale.rawScore;
         double actualKScore = Math.floor(kScore+.5);
-        int tScore = Integer.parseInt(tScale.get((int)actualKScore + 1));
+        String tScoreValue = tScale.get((int)actualKScore + 1);
+        if(tScoreValue.isEmpty()) {
+            return "undefined";
+        }
+        int tScore = Integer.parseInt(tScoreValue);
 
         currentScale.setkScore((long)actualKScore);
 

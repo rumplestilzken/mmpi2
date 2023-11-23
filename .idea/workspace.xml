@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Reworked how forms work">
+    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Workflow completed.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/AnswerLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/QuestionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/QuestionForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/ScaleProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/ScaleProcessor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -427,7 +426,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700757090792</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Workflow completed.">
+      <option name="closed" value="true" />
+      <created>1700757871454</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1700757871454</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -466,7 +473,8 @@
     <MESSAGE value="Refactored ScaleProcessor" />
     <MESSAGE value="Reworked some items" />
     <MESSAGE value="Reworked how forms work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reworked how forms work" />
+    <MESSAGE value="Workflow completed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Workflow completed." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
