@@ -28,7 +28,7 @@ public class QuestionForm extends Form{
 
         ((QMenu)mainWindow.menuBar().findChild("File")).clear();
 
-        QAction loadQuestionsAction = new QAction("Load Answers From JSON");
+        QAction loadQuestionsAction = new QAction("Load Answers");
         loadQuestionsAction.setObjectName("LoadAnswers");
         loadQuestionsAction.triggered.connect(this, "loadAnswers()");
         ((QMenu)mainWindow.menuBar().findChild("File")).addAction(loadQuestionsAction);
@@ -141,6 +141,13 @@ public class QuestionForm extends Form{
     public void nextForm() {
         Form nextForm = new ResultsForm(parent);
         setCurrentForm(nextForm);
+
+        QMainWindow mainWindow = (QMainWindow) parent;
+
+        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("LoadAnswers")).findFirst().get().dispose();
+        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SaveJSON")).findFirst().get().dispose();
+        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SavePDF")).findFirst().get().dispose();
+
     }
 
     void genderButtonClicked() {

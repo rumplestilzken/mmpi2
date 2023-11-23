@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Reworked some items">
+    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Reworked how forms work">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/Init.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/Init.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/Form.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/Form.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/IntroForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/IntroForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/MainForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/MainForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/QuestionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/QuestionForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/ResultsForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/ResultsForm.java" afterDir="false" />
     </list>
@@ -415,7 +411,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700742850722</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Reworked how forms work">
+      <option name="closed" value="true" />
+      <created>1700756654806</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1700756654806</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -453,7 +457,8 @@
     <MESSAGE value="Cleaned up loading functionality" />
     <MESSAGE value="Refactored ScaleProcessor" />
     <MESSAGE value="Reworked some items" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reworked some items" />
+    <MESSAGE value="Reworked how forms work" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reworked how forms work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
