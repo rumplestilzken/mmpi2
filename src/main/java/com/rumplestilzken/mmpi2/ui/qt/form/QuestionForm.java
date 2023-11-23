@@ -2,6 +2,11 @@ package com.rumplestilzken.mmpi2.ui.qt.form;
 
 import com.rumplestilzken.mmpi2.data.QuestionData;
 import com.rumplestilzken.mmpi2.data.ResultProcessor;
+import com.rumplestilzken.mmpi2.data.Storage;
+import com.rumplestilzken.mmpi2.data.scale.CriticalScale;
+import com.rumplestilzken.mmpi2.data.scale.Scale;
+import com.rumplestilzken.mmpi2.data.scale.ScaleProcessor;
+import com.rumplestilzken.mmpi2.data.scale.Scales;
 import io.qt.core.QObject;
 import io.qt.core.Qt;
 import io.qt.widgets.*;
@@ -139,6 +144,24 @@ public class QuestionForm extends Form{
 
     @Override
     public void nextForm() {
+        QGroupBox gb = ((QGroupBox)children().stream().filter(i -> i.getObjectName().equals("TopGroupBox")).findFirst().get());
+        QGroupBox mfgb = (QGroupBox) gb.children().stream().filter(i -> i.getObjectName().equals("MFGB")).findFirst().get();
+        QRadioButton mRadio = (QRadioButton)mfgb.children().stream().filter(i -> i.getObjectName().equals("MaleRadioButton")).findFirst().get();
+        boolean male = mRadio.isChecked();
+
+        List<QuestionData.QuestionAnswerData> answers = getAnswers();
+        List<Scale> scales = Scales.getScales();
+        List<CriticalScale> criticalScales = Scales.getCriticalScales();
+
+        ScaleProcessor sp = new ScaleProcessor();
+        double pe = sp.process(answers, scales, criticalScales, male);
+
+        Storage.setIsMale(male);
+        Storage.setAnswers(answers);
+        Storage.setScales(scales);
+        Storage.setCriticalScales(criticalScales);
+        Storage.setProfileEvaluation(pe);
+
         Form nextForm = new ResultsForm(parent);
         setCurrentForm(nextForm);
 
@@ -147,7 +170,6 @@ public class QuestionForm extends Form{
         ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("LoadAnswers")).findFirst().get().dispose();
         ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SaveJSON")).findFirst().get().dispose();
         ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SavePDF")).findFirst().get().dispose();
-
     }
 
     void genderButtonClicked() {
