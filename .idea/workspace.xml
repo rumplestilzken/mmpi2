@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Updated PFD Page logic and changed to gradle application" />
+    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Changed version">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/ResultProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/ResultProcessor.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,7 +72,7 @@
       <recent name="com.rumplestilzken.mmpi2.data" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.mmpi2-java::media:nick:dev:development:git:mmpi2-java [distTar]">
+  <component name="RunManager" selected="Gradle.mmpi2-java::media:nick:dev:development:git:mmpi2-java [run]">
     <configuration name="com.rumplestilzken.Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -128,6 +132,28 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="mmpi2-java::media:nick:dev:development:git:mmpi2-java [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="/media/nick/dev/development/git/mmpi2-java" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="com.rumplestilzken.mmpi2-java" />
       <method v="2">
@@ -143,6 +169,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.mmpi2-java::media:nick:dev:development:git:mmpi2-java [run]" />
         <item itemvalue="Gradle.mmpi2-java::media:nick:dev:development:git:mmpi2-java [distTar]" />
         <item itemvalue="Gradle.mmpi2-java::media:nick:dev:development:git:mmpi2-java [jar]" />
       </list>
@@ -309,7 +336,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700735790824</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Changed version">
+      <option name="closed" value="true" />
+      <created>1700735887683</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1700735887683</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -340,6 +375,7 @@
     <MESSAGE value="Finished KB CriticalScales" />
     <MESSAGE value="Finished LW CriticalScales" />
     <MESSAGE value="Updated PFD Page logic and changed to gradle application" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated PFD Page logic and changed to gradle application" />
+    <MESSAGE value="Changed version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed version" />
   </component>
 </project>

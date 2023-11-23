@@ -5,6 +5,13 @@ plugins {
 group = 'com.rumplestilzken'
 version = '1.0'
 
+if (!hasProperty('mainClass')) {
+    ext.mainClass = 'com.rumplestilzken.Main'
+}
+
+//For run task when not run in NetBeans, uses application plugin
+mainClassName = ext.mainClass;
+
 repositories {
     mavenCentral()
 }
