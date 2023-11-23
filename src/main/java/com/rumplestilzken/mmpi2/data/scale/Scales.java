@@ -149,6 +149,17 @@ public class Scales {
         list.add(new KB4());
         list.add(new KB5());
         list.add(new KB6());
+        list.add(new LW1());
+        list.add(new LW2());
+        list.add(new LW3());
+        list.add(new LW4());
+        list.add(new LW5());
+        list.add(new LW6());
+        list.add(new LW7());
+        list.add(new LW8());
+        list.add(new LW9());
+        list.add(new LW10());
+        list.add(new LW11());
         return list;
     }
 }

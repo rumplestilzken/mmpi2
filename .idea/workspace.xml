@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Updated TScales and Questions for Scales.">
+    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Finished KB CriticalScales">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/ResultProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/ResultProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/ScaleProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/ScaleProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/Scales.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/Scales.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +226,23 @@
       <option name="project" value="LOCAL" />
       <updated>1700677474066</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Finished KB CriticalScales">
+      <option name="closed" value="true" />
+      <created>1700730168403</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1700730168403</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Finished KB CriticalScales">
+      <option name="closed" value="true" />
+      <created>1700730184092</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1700730184092</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -257,6 +270,7 @@
     <MESSAGE value="Working K Score Correction Values" />
     <MESSAGE value="Reworked some logic regarding Tscales" />
     <MESSAGE value="Updated TScales and Questions for Scales." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated TScales and Questions for Scales." />
+    <MESSAGE value="Finished KB CriticalScales" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished KB CriticalScales" />
   </component>
 </project>
