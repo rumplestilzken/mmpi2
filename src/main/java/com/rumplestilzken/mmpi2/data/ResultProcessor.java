@@ -30,9 +30,10 @@ public class ResultProcessor {
         JSONObject answerObject = new JSONObject();
         JSONObject scales = new JSONObject();
         List<Scale> scaleList = Scales.getScales();
+        List<CriticalScale> criticalScales = Scales.getCriticalScales();
 
         ScaleProcessor sp = new ScaleProcessor();
-        answerObject.put("Profile Evaluation", sp.process(answers, scaleList, isMale));
+        answerObject.put("Profile Evaluation", sp.process(answers, scaleList, criticalScales, isMale));
 
         scaleList.stream().forEachOrdered(i -> {
 //            JSONObject scale = new JSONObject();
@@ -46,6 +47,18 @@ public class ResultProcessor {
             scales.put(i.toString(), map);
         });
         answerObject.put("scales", scales);
+
+        JSONObject criticalScalesObject = new JSONObject();
+        criticalScales.forEach(i -> {
+            if(i.isVisible()) {
+                JSONObject object = new JSONObject();
+                object.put("description", i.getDescription());
+                object.put("true", i.getTrueValues());
+                object.put("false", i.getFalseValues());
+                criticalScalesObject.put(i.toString(), object);
+            }
+        });
+        answerObject.put("critical_scales", criticalScalesObject);
 
         JSONObject answerWrapper = new JSONObject();
         for(QuestionData.QuestionAnswerData answer : answers) {
@@ -68,9 +81,11 @@ public class ResultProcessor {
 
     public boolean writePDFDocument(List<QuestionData.QuestionAnswerData> answers, String path) {
         List<Scale> scaleList = Scales.getScales();
+        List<CriticalScale> criticalScales = Scales.getCriticalScales();
 
         ScaleProcessor sp = new ScaleProcessor();
-        double profileEvaluation = sp.process(answers, scaleList, isMale);
+        double profileEvaluation = sp.process(answers, scaleList, criticalScales, isMale);
+
         Document document = new Document();
         try {
             PdfWriter.getInstance(document, new FileOutputStream(path));
@@ -169,6 +184,8 @@ public class ResultProcessor {
             document.add(table);
 
             document.newPage();
+
+            //TODO: Critical Scales
 
             Paragraph peParagraph = new Paragraph("Profile Evaluation: " + profileEvaluation);
             document.add(peParagraph);

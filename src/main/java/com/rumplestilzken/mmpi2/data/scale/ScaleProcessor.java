@@ -12,7 +12,7 @@ public class ScaleProcessor {
     Map<Integer, Boolean> answerMap = new HashMap<>();
     String[] ignoreList = { "True", "False", "?" };
 
-    public double process(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList, boolean isMale) {
+    public double process(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList, List<CriticalScale> criticalScales,  boolean isMale) {
         answers.forEach(i -> answerMap.put(i.getIndex(), i.getAnswer()));
 
         for(int i = 0; i < scaleList.size(); i++) {
@@ -29,6 +29,8 @@ public class ScaleProcessor {
 
         processTScores(answers, scaleList, isMale);
 
+        processCritical(answers, criticalScales);
+        
         List<String> peScalesList = new ArrayList<>();
         peScalesList.add("Hs");
         peScalesList.add("D");
@@ -53,6 +55,20 @@ public class ScaleProcessor {
             peScale += tmp;
         }
         return peScale/8;
+    }
+
+    public void processCritical(List<QuestionData.QuestionAnswerData> answers, List<CriticalScale> criticalScales) {
+        criticalScales.forEach(currentScale -> {
+            List<String> trueValues = currentScale.getTrueQuestions().stream().filter(currentQuestion -> answers.stream().filter(i -> i.getIndex() == Integer.parseInt(currentQuestion) && i.getAnswer() == Boolean.TRUE).count() > 0).toList();
+            List<String> falseValues = currentScale.getFalseQuestions().stream().filter(currentQuestion -> answers.stream().filter(i -> i.getIndex() == Integer.parseInt(currentQuestion) && i.getAnswer() == Boolean.FALSE).count() > 0).toList();
+            boolean t = trueValues.stream().count() > 0;
+            boolean f =  falseValues.stream().count() > 0;
+            if(t || f) {
+                currentScale.getTrueValues().addAll(trueValues);
+                currentScale.getFalseValues().addAll(falseValues);
+                currentScale.setVisible(true);
+            }
+        });
     }
 
     private String getTScore(K k, List<String> tScale, Scale currentScale)
@@ -126,8 +142,7 @@ public class ScaleProcessor {
             }
         }
     }
-
-
+    
     private void processTRIN(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList) {
         TRIN trin = (TRIN) scaleList.stream().filter(i -> i instanceof TRIN).findFirst().get();
         long baseScore = trin.getRawScore();

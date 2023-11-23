@@ -140,4 +140,15 @@ public class Scales {
         scales.add(new TRT2());
         return scales;
     }
+
+    public static List<CriticalScale> getCriticalScales() {
+        List<CriticalScale> list = new ArrayList<>();
+        list.add(new KB1());
+        list.add(new KB2());
+        list.add(new KB3());
+        list.add(new KB4());
+        list.add(new KB5());
+        list.add(new KB6());
+        return list;
+    }
 }
