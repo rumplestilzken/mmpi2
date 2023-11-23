@@ -1,17 +1,11 @@
 package com.rumplestilzken.mmpi2.ui.qt.form;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfWriter;
 import com.rumplestilzken.mmpi2.data.QuestionData;
 import com.rumplestilzken.mmpi2.data.ResultProcessor;
 import io.qt.core.QObject;
 import io.qt.core.Qt;
 import io.qt.widgets.*;
 
-import javax.swing.*;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,15 +23,20 @@ public class QuestionForm extends Form{
         ((QMenu)mainWindow.menuBar().findChild("File")).clear();
 
         QAction loadQuestionsAction = new QAction("Load Answers From JSON");
+        loadQuestionsAction.setObjectName("LoadAnswers");
         loadQuestionsAction.triggered.connect(this, "loadAnswers()");
         ((QMenu)mainWindow.menuBar().findChild("File")).addAction(loadQuestionsAction);
 
         QAction saveJSONAction = new QAction("Save JSON");
+        saveJSONAction.setObjectName("SaveJSON");
         saveJSONAction.triggered.connect(this, "getResults()");
+        saveJSONAction.setEnabled(false);
         ((QMenu)mainWindow.menuBar().findChild("File")).addAction(saveJSONAction);
 
         QAction savePDFAction = new QAction("Save PDF");
+        savePDFAction.setObjectName("SavePDF");
         savePDFAction.triggered.connect(this, "savePDFResults()");
+        savePDFAction.setEnabled(false);
         ((QMenu)mainWindow.menuBar().findChild("File")).addAction(savePDFAction);
 
         QGridLayout layout = (QGridLayout)layout();
@@ -53,9 +52,6 @@ public class QuestionForm extends Form{
         tf.setLayout(new QHBoxLayout());
         tf.setFixedHeight(40);
         tf.setFixedWidth(90);
-
-//        QSpacerItem spacer = new QSpacerItem(8, 0);
-//        ((QHBoxLayout)tf.layout()).addSpacerItem(spacer);
 
         QLabel t = new QLabel("T");
         t.setObjectName("T");
@@ -77,7 +73,6 @@ public class QuestionForm extends Form{
         QRadioButton female = new QRadioButton("Female");
         female.setObjectName("FemaleRadioButton");
         mfgb.layout().addWidget(female);
-//        layout.addWidget(mfgb);
 
         QGroupBox form = new QGroupBox();
         form.setObjectName("Form");
@@ -97,8 +92,6 @@ public class QuestionForm extends Form{
         ((QGridLayout)topGroupBox.layout()).addWidget(tf, 0, 0, Qt.AlignmentFlag.AlignLeft);
         ((QGridLayout)topGroupBox.layout()).addWidget(mfgb, 0, 1, Qt.AlignmentFlag.AlignTop);
         ((QGridLayout)topGroupBox.layout()).addWidget(form, 0, 2, Qt.AlignmentFlag.AlignTop);
-
-//        layout.addWidget(tf);
 
         layout.addWidget(topGroupBox);
 
@@ -130,13 +123,24 @@ public class QuestionForm extends Form{
         questionsScroll.setWidget(questionBox);
 
         layout.addWidget(questionsScroll);
-
-//        QPushButton getResultsButton = new QPushButton("Get Results");
-//        getResultsButton.released.connect(this, "getResults()");
-//        layout.addWidget(getResultsButton, 0, 2, Qt.AlignmentFlag.AlignTop);
     }
 
     void loadAnswers() {
+        String path = "";
+        loadAnswersFromText(path);
+        loadAnswersFromJSON(path);
+    }
+
+    private void loadAnswersFromJSON(String path) {
+        String answers = ""; //TODO:
+        if(!answers.startsWith("{"))
+        {
+            return;
+        }
+    }
+
+    private void loadAnswersFromText(String path) {
+
         String answers = "TFFTFTTTTFTFTTTTFFTTTTTFFTFFTFTTTFTFTTTFTFFFTFTTTTTTTFTFFTFFTFTFFFTTFFFTFFT" +
                 "TTTTFTTFTTFTTTTFFTTTFTTFFFTFFTFTTFTFFTFTTTTFTFTTTFTFTTTFTFTFTFFTFTTTFFFTFFF" +
                 "FTTTTFTFTFTFFTFTFTTFFTFTFTFTFTTTTFFTTTTFFTFFTTFFTTFFTFFTFTTTTTFTTFFTTFTTFTT" +
@@ -145,6 +149,10 @@ public class QuestionForm extends Form{
                 "FTFTTFFTFTTFFTTTFFFFFFTFFFFTTTFFTTTFFTTTTFTTTFFTTFFTFFTTTTTFTTTFTFTFFFFFFTF" +
                 "FTFFFFFTTTTTFTTTTFTTFTTTTTFFTTTFFFTTTFFTFTTTFFFFTFTTFTFFTTFTTTTTFFFTFFTFTFT" +
                 "TTFTFFTTTTFFTFFFTTFTTTTTTTTTFFFTFFFFTTFTTF";
+
+        if(!(answers.startsWith("T") || answers.startsWith("F") | answers.startsWith("?"))){
+            return;
+        }
 
         QGroupBox gb = (QGroupBox) children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get()
                 .children().stream().findFirst().get()
@@ -163,7 +171,8 @@ public class QuestionForm extends Form{
                     qfd.getFalseRadio().setChecked(true);
                 }
                 else {
-                    //Do Nothing
+                    qfd.getTrueRadio().setChecked(false);
+                    qfd.getFalseRadio().setChecked(false);
                 }
             }
             catch (Exception e) {
@@ -235,7 +244,6 @@ public class QuestionForm extends Form{
             qfd.setObjectName("QFD_" + q.getIndex());
             gb.layout().addWidget(qfd);
         }
-
     }
 
     void longForm() {

@@ -17,9 +17,9 @@ public class ScaleProcessor {
             scaleList.get(i).setIndex(i);
         }
 
-        processTrueScale(answers, scaleList);
-        processFalseScale(answers, scaleList);
-        processQuestionScale(answers, scaleList);
+        processBooleanScale(True.class, Boolean.TRUE, answers, scaleList);
+        processBooleanScale(False.class, Boolean.FALSE, answers, scaleList);
+        processBooleanScale(QuestionScale.class, null, answers, scaleList);
         processRIN(VRIN.class, VRIN.getVRINPairs(), answers, scaleList);
         processRIN(TRIN.class, TRIN.getTRINPairs(), answers, scaleList);
 
@@ -102,6 +102,13 @@ public class ScaleProcessor {
 
     private void processTScores(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList, boolean isMale) {
         K kScale = (K) scaleList.stream().filter(i -> i instanceof K).findFirst().get();
+
+        //No Answers
+        if(answers.stream().noneMatch(i -> i.getAnswer() == Boolean.TRUE || i.getAnswer() == Boolean.FALSE))
+        {
+            return;
+        }
+
         scaleList.forEach(currentScale -> {
             currentScale.settScore(getTScore(kScale, isMale ? currentScale.getMaleTScale() : currentScale.getFemaleTScale(), currentScale));
         });
@@ -128,18 +135,21 @@ public class ScaleProcessor {
         long baseScore = rin.getRawScore();
         for (RINPair currentPair: rinPairs) {
             Optional<QuestionData.QuestionAnswerData> q1O = answers.stream().filter(i -> i.getIndex() == currentPair.getIndex1()).findFirst();
-            if(!q1O.isPresent())
+            Optional<QuestionData.QuestionAnswerData> q2O = answers.stream().filter(i -> i.getIndex() == currentPair.getIndex2()).findFirst();
+            if(!q1O.isPresent() || !q2O.isPresent())
             {
                 continue;
             }
-            Optional<QuestionData.QuestionAnswerData> q2O = answers.stream().filter(i -> i.getIndex() == currentPair.getIndex2()).findFirst();
-            if(!q2O.isPresent())
+
+            QuestionData.QuestionAnswerData q1a = q1O.get();
+            QuestionData.QuestionAnswerData q2a = q2O.get();
+            if(q1a.getAnswer() == null || q2a.getAnswer() == null)
             {
                 continue;
             }
 
 //            System.out.println("Index1:" + currentPair.index1 + ",Answer1:" + answer1 + ",Index2:" + currentPair.getIndex2() + ",Answer2:" + answer2);
-            if(q1O.get().getAnswer() == currentPair.isBool1() && q2O.get().getAnswer() == currentPair.isBool2())
+            if(q1a.getAnswer() == currentPair.isBool1() && q2a.getAnswer() == currentPair.isBool2())
             {
                 baseScore += currentPair.getValue();
             }
@@ -147,15 +157,7 @@ public class ScaleProcessor {
         rin.setRawScore(baseScore);
     }
 
-    private void processTrueScale(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList) {
-        scaleList.stream().filter(i -> i instanceof True).findFirst().get().rawScore = answers.stream().filter(i -> i.getAnswer() == Boolean.TRUE).count();
-    }
-
-    private void processFalseScale(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList) {
-        scaleList.stream().filter(i -> i instanceof False).findFirst().get().rawScore = answers.stream().filter(i -> i.getAnswer() == Boolean.FALSE).count();
-    }
-
-    private void processQuestionScale(List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList) {
-        scaleList.stream().filter(i -> i instanceof QuestionScale).findFirst().get().rawScore = answers.stream().filter(i -> i.getAnswer() == null).count();
+    private void processBooleanScale(Class clazz, Boolean bool, List<QuestionData.QuestionAnswerData> answers, List<Scale> scaleList) {
+        scaleList.stream().filter(clazz::isInstance).findFirst().get().rawScore = answers.stream().filter(i -> i.getAnswer() == bool).count();
     }
 }
