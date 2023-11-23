@@ -10,6 +10,7 @@ public class Init {
     public void start(String[] args) {
         QApplication.initialize(args);
         QApplication.setWindowIcon(new QIcon("resources/icon.jpg"));
+        QApplication.setApplicationName("MMPI-2");
         
         QMainWindow window = new QMainWindow();
         window.setFixedSize(1024, 768);

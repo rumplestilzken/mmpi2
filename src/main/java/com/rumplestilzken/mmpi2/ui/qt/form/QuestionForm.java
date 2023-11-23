@@ -12,6 +12,7 @@ import java.util.List;
 public class QuestionForm extends Form{
     public QuestionForm(QWidget parent) {
         super(parent);
+        setObjectName("QuestionForm");
     }
 
     @Override
@@ -19,6 +20,11 @@ public class QuestionForm extends Form{
         super.buildUI();
 
         QMainWindow mainWindow = (QMainWindow) parent;
+
+        QPushButton next = ((QPushButton)mainWindow.children().stream().filter(i -> i.getObjectName().equals("MainForm")).findFirst().get()
+                .children().stream().filter(i -> i.getObjectName().equals("Next")).findFirst().get());
+        next.setText("Get Results");
+        next.setEnabled(false);
 
         ((QMenu)mainWindow.menuBar().findChild("File")).clear();
 
@@ -125,12 +131,25 @@ public class QuestionForm extends Form{
         questionsScroll.setWidget(questionBox);
 
         layout.addWidget(questionsScroll);
+
+//        QPushButton getResultsButton = new QPushButton("Get Results");
+//        getResultsButton.released.connect(this, "getResults()");
+//        layout.addWidget(getResultsButton, 0, 2, Qt.AlignmentFlag.AlignTop);
+    }
+
+    @Override
+    public void nextForm() {
+        Form nextForm = new ResultsForm(parent);
+        setCurrentForm(nextForm);
     }
 
     void genderButtonClicked() {
         QMainWindow mainWindow = (QMainWindow) parent;
         ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SaveJSON")).findFirst().get().setEnabled(true);
         ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SavePDF")).findFirst().get().setEnabled(true);
+        QPushButton next = ((QPushButton)mainWindow.children().stream().filter(i -> i.getObjectName().equals("MainForm")).findFirst().get()
+                .children().stream().filter(i -> i.getObjectName().equals("Next")).findFirst().get());
+        next.setEnabled(true);
     }
 
     void loadAnswers() {

@@ -12,6 +12,7 @@ public class IntroForm extends Form {
 
     public IntroForm(QWidget parent) {
         super(parent);
+        setObjectName("IntroForm");
     }
 
     @Override
@@ -27,22 +28,6 @@ public class IntroForm extends Form {
         String introText = "Welcome, this is a small implementation of the MMPI-2. \nYou can save your question answers and your results using File->*";
         QLabel introLabel = new QLabel(introText);
         layout.addWidget(introLabel, 1, 0, Qt.AlignmentFlag.AlignHCenter);
-
-
-
-
-//        layout.removeWidget(headerLabel);
-//        layout.removeWidget(headerLabel);
-//        headerLabel.dispose();
-
-//        layout.disconnect();
-
-//        layout.dispose();
-//        layout.update();
-
-//        connect(nextButton, "next()", this, "next()");
-
-//        System.out.println(layout().indexOf(headerLabel));
     }
 
 
