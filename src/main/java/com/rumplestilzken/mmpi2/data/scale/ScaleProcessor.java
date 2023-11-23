@@ -66,16 +66,19 @@ public class ScaleProcessor {
 
     private String getTScore(K k, List<String> tScale, Scale currentScale)
     {
+        //No T Scale
         if(tScale.isEmpty())
         {
             return "undefined";
         }
 
+        //RIN
         if(currentScale instanceof VRIN || currentScale instanceof TRIN)
         {
             return tScale.get(Math.toIntExact(currentScale.rawScore));
         }
 
+        //Normal, non-corrected T Scale Value
         if(tScale.get(0).equals(""))
         {
             if(tScale.get((int)currentScale.rawScore+1).isEmpty())
@@ -85,6 +88,7 @@ public class ScaleProcessor {
             return tScale.get(Math.toIntExact(currentScale.rawScore + 1));
         }
 
+        //Corrected T Scale Value
         long kValue = k.rawScore;
         double kScore = kValue*Double.parseDouble(tScale.get(0))+currentScale.rawScore;
         double actualKScore = Math.floor(kScore+.5);

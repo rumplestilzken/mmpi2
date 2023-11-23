@@ -63,6 +63,7 @@ public class ResultProcessor {
         answerObject.put("Answers", answerWrapper);
 
         answerObject.put("origin", "http://www.ohiofamilyrights.com/docs/MMPI_scoring.html");
+        answerObject.put("creator", "https://github.com/rumplestilzken/mmpi2/");
 
         ObjectMapper objectMapper = new ObjectMapper();
         Object jsonObject = null;
@@ -107,7 +108,7 @@ public class ResultProcessor {
         document.addTitle("MMPI-2");
         document.addSubject("MMPI-2");
         document.addAuthor("rumplestilzken");
-        document.addCreator("rumplestilzken");
+        document.addCreator("https://github.com/rumplestilzken/mmpi2/");
     }
 
     private static void addSummaryPages(List<QuestionData.QuestionAnswerData> answers, double profileEvaluation, Document document) throws DocumentException {
@@ -268,7 +269,7 @@ public class ResultProcessor {
 
         addEmptyLine(titlePage, 3);
         titlePage.add(new Paragraph(
-                "Software used to generate report: https://github.com/rumplestilzken/mmpi2/releases"));
+                "Software used to generate report: https://github.com/rumplestilzken/mmpi2/"));
 
         addEmptyLine(titlePage, 3);
 

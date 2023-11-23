@@ -69,9 +69,11 @@ public class QuestionForm extends Form{
 
         QRadioButton male = new QRadioButton("Male");
         male.setObjectName("MaleRadioButton");
+        male.clicked.connect(this, "genderButtonClicked()");
         mfgb.layout().addWidget(male);
         QRadioButton female = new QRadioButton("Female");
         female.setObjectName("FemaleRadioButton");
+        female.clicked.connect(this, "genderButtonClicked()");
         mfgb.layout().addWidget(female);
 
         QGroupBox form = new QGroupBox();
@@ -123,6 +125,12 @@ public class QuestionForm extends Form{
         questionsScroll.setWidget(questionBox);
 
         layout.addWidget(questionsScroll);
+    }
+
+    void genderButtonClicked() {
+        QMainWindow mainWindow = (QMainWindow) parent;
+        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SaveJSON")).findFirst().get().setEnabled(true);
+        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SavePDF")).findFirst().get().setEnabled(true);
     }
 
     void loadAnswers() {
