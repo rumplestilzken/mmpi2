@@ -2,12 +2,14 @@ package com.rumplestilzken.mmpi2.ui.qt;
 
 import com.rumplestilzken.mmpi2.data.SaveProcessor;
 import com.rumplestilzken.mmpi2.ui.qt.form.MainForm;
+import io.qt.gui.QIcon;
 import io.qt.gui.QWindow;
 import io.qt.widgets.*;
 
 public class Init {
     public void start(String[] args) {
         QApplication.initialize(args);
+        QApplication.setWindowIcon(new QIcon("resources/icon.jpg"));
         
         QMainWindow window = new QMainWindow();
         window.setFixedSize(1024, 768);
