@@ -6,13 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Continued scales">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/A.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/A.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/Es.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/Es.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/FAM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/FAM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/SOD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/SOD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/TRT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/TRT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/WRK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/WRK.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/AAS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/AAS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/APS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/APS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/Ho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/Ho.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/MAC_R.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/MAC_R.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/MDS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/scale/MDS.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -472,7 +470,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701307244464</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Continued scales">
+      <option name="closed" value="true" />
+      <created>1701351011174</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1701351011174</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="UnknownFeatures">
