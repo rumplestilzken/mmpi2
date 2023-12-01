@@ -139,7 +139,7 @@ public class ResultProcessor {
 
     private static void addCriticalScalePages(Document document, List<CriticalScale> criticalScales) throws DocumentException {
         document.newPage();
-        Paragraph criticalItemsText = new Paragraph("Critical Items Scale");
+        Paragraph criticalItemsText = new Paragraph("Critical Scale Items");
         document.add(criticalItemsText);
 
         addEmptyLine(criticalItemsText, 2);
