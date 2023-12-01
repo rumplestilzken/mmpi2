@@ -247,7 +247,7 @@ public class ResultProcessor {
             }
             else {
                 PdfPCell cell = new PdfPCell();
-                Paragraph paragraph = null;
+                Phrase paragraph = null;
                 Font font = null;
                 String cellText = "";
                 try {
@@ -260,7 +260,7 @@ public class ResultProcessor {
                 catch (Exception e) {
 
                 }
-                paragraph = new Paragraph(currentScale.gettScore());
+                paragraph = new Phrase(currentScale.gettScore());
                 if(font != null)
                 {
                     paragraph.setFont(font);

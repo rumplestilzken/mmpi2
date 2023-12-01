@@ -95,6 +95,8 @@ public class Scales {
         scales.add(new Hy_S());
         scales.add(new Pd_O());
         scales.add(new Pd_S());
+        scales.add(new Pa_O());
+        scales.add(new Pa_S());
         scales.add(new Ma_O());
         scales.add(new Ma_S());
         scales.add(new dem());
