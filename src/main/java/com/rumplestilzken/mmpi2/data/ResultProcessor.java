@@ -2,6 +2,7 @@ package com.rumplestilzken.mmpi2.data;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -245,7 +246,27 @@ public class ResultProcessor {
                 table.addCell(" ");
             }
             else {
-                table.addCell(currentScale.gettScore());
+                PdfPCell cell = new PdfPCell();
+                Paragraph paragraph = null;
+                Font font = null;
+                String cellText = "";
+                try {
+                    double d = Double.parseDouble(currentScale.gettScore());
+                    if(d > 75)
+                    {
+                        font = FontFactory.getFont(FontFactory.HELVETICA, 12, BaseColor.RED);
+                    }
+                }
+                catch (Exception e) {
+
+                }
+                paragraph = new Paragraph(new Paragraph(currentScale.gettScore()));
+                if(font != null)
+                {
+                    paragraph.setFont(font);
+                }
+                cell.addElement(paragraph);
+                table.addCell(cell);
             }
 
         });
