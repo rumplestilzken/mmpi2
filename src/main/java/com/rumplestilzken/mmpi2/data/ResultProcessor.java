@@ -260,7 +260,7 @@ public class ResultProcessor {
                 catch (Exception e) {
 
                 }
-                paragraph = new Paragraph(new Paragraph(currentScale.gettScore()));
+                paragraph = new Paragraph(currentScale.gettScore());
                 if(font != null)
                 {
                     paragraph.setFont(font);
