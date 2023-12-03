@@ -48,9 +48,13 @@ public class Storage {
     }
 
     private static boolean isMale = false;
+    private static boolean isLong = false;
     private static double profileEvaluation = 0;
     private static List<Scale> scales = null;
     private static List<CriticalScale> criticalScales = null;
     private static List<QuestionData.QuestionAnswerData> answers = null;
 
+    public static void setIsLong(boolean isLong) {
+        Storage.isLong = isLong;
+    }
 }

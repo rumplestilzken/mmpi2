@@ -7,10 +7,18 @@ import com.rumplestilzken.mmpi2.data.scale.CriticalScale;
 import com.rumplestilzken.mmpi2.data.scale.Scale;
 import com.rumplestilzken.mmpi2.data.scale.ScaleProcessor;
 import com.rumplestilzken.mmpi2.data.scale.Scales;
+import io.qt.NonNull;
 import io.qt.core.QObject;
+import io.qt.core.QString;
+import io.qt.core.QStringList;
 import io.qt.core.Qt;
 import io.qt.widgets.*;
+import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +41,15 @@ public class QuestionForm extends Form{
 
         ((QMenu)mainWindow.menuBar().findChild("File")).clear();
 
-        QAction loadQuestionsAction = new QAction("Load Answers");
+        QAction loadQuestionsAction = new QAction("Load Answers From File");
         loadQuestionsAction.setObjectName("LoadAnswers");
-        loadQuestionsAction.triggered.connect(this, "loadAnswers()");
+        loadQuestionsAction.triggered.connect(this, "loadAnswersFromFile()");
         ((QMenu)mainWindow.menuBar().findChild("File")).addAction(loadQuestionsAction);
+
+        QAction loadQuestionsTextAction = new QAction("Load Answers From Text");
+        loadQuestionsTextAction.setObjectName("LoadAnswersText");
+        loadQuestionsTextAction.triggered.connect(this, "loadAnswersFromText()");
+        ((QMenu)mainWindow.menuBar().findChild("File")).addAction(loadQuestionsTextAction);
 
         QAction saveJSONAction = new QAction("Save JSON");
         saveJSONAction.setObjectName("SaveJSON");
@@ -145,9 +158,12 @@ public class QuestionForm extends Form{
     @Override
     public void nextForm() {
         QGroupBox gb = ((QGroupBox)children().stream().filter(i -> i.getObjectName().equals("TopGroupBox")).findFirst().get());
+        QGroupBox lsForm = (QGroupBox) gb.children().stream().filter(i -> i.getObjectName().equals("Form")).findFirst().get();
         QGroupBox mfgb = (QGroupBox) gb.children().stream().filter(i -> i.getObjectName().equals("MFGB")).findFirst().get();
         QRadioButton mRadio = (QRadioButton)mfgb.children().stream().filter(i -> i.getObjectName().equals("MaleRadioButton")).findFirst().get();
+        QRadioButton lRadio = (QRadioButton)lsForm.children().stream().filter(i -> i.getObjectName().equals("LongRadioButton")).findFirst().get();
         boolean male = mRadio.isChecked();
+        boolean isLong = lRadio.isChecked();
 
         List<QuestionData.QuestionAnswerData> answers = getAnswers();
         List<Scale> scales = Scales.getScales();
@@ -157,6 +173,7 @@ public class QuestionForm extends Form{
         double pe = sp.process(answers, scales, criticalScales, male);
 
         Storage.setIsMale(male);
+        Storage.setIsLong(isLong);
         Storage.setAnswers(answers);
         Storage.setScales(scales);
         Storage.setCriticalScales(criticalScales);
@@ -168,6 +185,7 @@ public class QuestionForm extends Form{
         QMainWindow mainWindow = (QMainWindow) parent;
 
         ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("LoadAnswers")).findFirst().get().dispose();
+        ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("LoadAnswersText")).findFirst().get().dispose();
         ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SaveJSON")).findFirst().get().dispose();
         ((QMenu)mainWindow.menuBar().findChild("File")).actions().stream().filter(i -> i.getObjectName().equals("SavePDF")).findFirst().get().dispose();
     }
@@ -181,30 +199,47 @@ public class QuestionForm extends Form{
         next.setEnabled(true);
     }
 
-    void loadAnswers() {
-        String path = "";
-        loadAnswersFromText(path);
-        loadAnswersFromJSON(path);
-    }
-
-    private void loadAnswersFromJSON(String path) {
-        String answers = ""; //TODO:
-        if(!answers.startsWith("{"))
-        {
-            return;
+    private void loadAnswersFromFile() {
+        QFileDialog.Result<String> dialog = QFileDialog.getOpenFileName();
+        String file = dialog.result;
+        try {
+            InputStream fis = new FileInputStream(file);
+            String answers = new String(fis.readAllBytes());
+            if(answers.startsWith("{"))
+            {
+                loadAnswersFromJSON(answers);
+            }
+            else  {
+                loadAnswersFromText(answers);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    private void loadAnswersFromText(String path) {
+    private void loadAnswersFromText() {
+        QFileDialog.Result<String> dialog = QFileDialog.getOpenFileName();
+        String file = dialog.result;
+        try {
+            InputStream fis = new FileInputStream(file);
+            String answers = new String(fis.readAllBytes());
+            if(answers.startsWith("{"))
+            {
+                loadAnswersFromJSON(answers);
+            }
+            else  {
+                loadAnswersFromText(answers);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-        String answers = "TFFTFTTTTFTFTTTTFFTTTTTFFTFFTFTTTFTFTTTFTFFFTFTTTTTTTFTFFTFFTFTFFFTTFFFTFFT" +
-                "TTTTFTTFTTFTTTTFFTTTFTTFFFTFFTFTTFTFFTFTTTTFTFTTTFTFTTTFTFTFTFFTFTTTFFFTFFF" +
-                "FTTTTFTFTFTFFTFTFTTFFTFTFTFTFTTTTFFTTTTFFTFFTTFFTTFFTFFTFTTTTTFTTFFTTFTTFTT" +
-                "TTFTTTTTFFFTFFFFTFTFTFFTTTFFTTTFTFTTTFTFFTFFFTTFFTTTTTTFFFTTTFFFFFFFFTFTFTF" +
-                "FTFTTFTTTFFFFTTTTTFTTFFTTFTTFTTFFFTFTTTFTFFFTTFFFTFTFTFTFFFTFTFFTTTFFFFFTTF" +
-                "FTFTTFFTFTTFFTTTFFFFFFTFFFFTTTFFTTTFFTTTTFTTTFFTTFFTFFTTTTTFTTTFTFTFFFFFFTF" +
-                "FTFFFFFTTTTTFTTTTFTTFTTTTTFFTTTFFFTTTFFTFTTTFFFFTFTTFTFFTTFTTTTTFFFTFFTFTFT" +
-                "TTFTFFTTTTFFTFFFTTFTTTTTTTTTFFFTFFFFTTFTTF";
+    private void loadAnswersFromText(String answers) {
 
         if(!(answers.startsWith("T") || answers.startsWith("F") | answers.startsWith("?"))){
             return;
@@ -214,10 +249,11 @@ public class QuestionForm extends Form{
                 .children().stream().findFirst().get()
                 .children().stream().findFirst().get();
 
+        char[] array = answers.toCharArray();
         for(int index = 0; index < answers.length(); index++) {
             final int finalIndex = index+1;
-            char currentChar = answers.toCharArray()[index];
             try {
+                char currentChar = array[index];
                 QuestionFormData qfd = (QuestionFormData) gb.children().stream().filter(i -> i.getObjectName().equals("QFD_" + Integer.toString(finalIndex))).findFirst().get();
                 if(currentChar == 'T')
                 {
@@ -237,16 +273,87 @@ public class QuestionForm extends Form{
         }
     }
 
+    private void loadAnswersFromJSON(String answers) {
+        if(!answers.startsWith("{"))
+        {
+            return;
+        }
+        JSONObject jsonObject = new JSONObject(answers);
+        JSONObject answersObject = jsonObject.getJSONObject("Answers");
+        QVBoxLayout layout = ((QVBoxLayout)((QScrollArea) children().stream().filter(i -> i.getObjectName().equals("QuestionScroll")).findFirst().get())
+                .children().stream().findFirst().get()
+                .children().stream().findFirst().get()
+                .children().stream().findFirst().get());
+        QGroupBox gb = ((QGroupBox)children().stream().filter(i -> i.getObjectName().equals("TopGroupBox")).findFirst().get());
+        QGroupBox lsForm = (QGroupBox) gb.children().stream().filter(i -> i.getObjectName().equals("Form")).findFirst().get();
+        QGroupBox mfgb = (QGroupBox) gb.children().stream().filter(i -> i.getObjectName().equals("MFGB")).findFirst().get();
+        QRadioButton lRadio = (QRadioButton)lsForm.children().stream().filter(i -> i.getObjectName().equals("LongRadioButton")).findFirst().get();
+        QRadioButton sRadio = (QRadioButton)lsForm.children().stream().filter(i -> i.getObjectName().equals("ShortRadioButton")).findFirst().get();
+        QRadioButton mRadio = (QRadioButton)mfgb.children().stream().filter(i -> i.getObjectName().equals("MaleRadioButton")).findFirst().get();
+        QRadioButton fRadio = (QRadioButton)mfgb.children().stream().filter(i -> i.getObjectName().equals("FemaleRadioButton")).findFirst().get();
+
+        String gender = jsonObject.getString("gender");
+        if(gender.equals("Male"))
+        {
+            mRadio.setChecked(true);
+        }
+        else {
+            fRadio.setChecked(true);
+        }
+
+        String form = jsonObject.getString("form");
+        if(form.equals("Short"))
+        {
+            sRadio.setChecked(true);
+        }
+        else {
+            lRadio.setChecked(true);
+        }
+
+        for(int i = 1; i <= answersObject.length(); i++) {
+            String answerRaw = "";
+            Boolean answer = null;
+            try {
+                answerRaw = answersObject.getString(Integer.toString(i));
+            }
+            catch (Exception e) {
+                answerRaw = "?";
+            }
+            try {
+                answer = answersObject.getBoolean(Integer.toString(i));
+            }
+            catch (Exception e) {
+                answer = null;
+            }
+            QuestionFormData qfd = (QuestionFormData) layout.itemAt(i-1).widget();
+            if(answer == null && answerRaw.equals("?")) {
+                qfd.getTrueRadio().setChecked(false);
+                qfd.getFalseRadio().setChecked(false);
+            }
+            else if (answer) {
+                qfd.getTrueRadio().setChecked(true);
+            }
+            else {
+                qfd.getFalseRadio().setChecked(true);
+            }
+        }
+    }
+
     void savePDFResults() {
         QGroupBox gb = ((QGroupBox)children().stream().filter(i -> i.getObjectName().equals("TopGroupBox")).findFirst().get());
         QGroupBox mfgb = (QGroupBox) gb.children().stream().filter(i -> i.getObjectName().equals("MFGB")).findFirst().get();
         QRadioButton mRadio = (QRadioButton)mfgb.children().stream().filter(i -> i.getObjectName().equals("MaleRadioButton")).findFirst().get();
+        QGroupBox lsForm = (QGroupBox) gb.children().stream().filter(i -> i.getObjectName().equals("Form")).findFirst().get();
+        QRadioButton lRadio = (QRadioButton)lsForm.children().stream().filter(i -> i.getObjectName().equals("LongRadioButton")).findFirst().get();
         boolean male = mRadio.isChecked();
+        boolean isLong = lRadio.isChecked();
 
         List<QuestionData.QuestionAnswerData> answers = getAnswers();
 
-        ResultProcessor rp = new ResultProcessor(male);
-        boolean success = rp.writePDFDocument(answers, "/home/nick/dev/tmp/MMPI2.pdf");
+        ResultProcessor rp = new ResultProcessor(male, isLong);
+
+        QFileDialog.Result<String> dialog = QFileDialog.getOpenFileName();
+        boolean success = rp.writePDFDocument(answers, dialog.result);
     }
 
     List<QuestionData.QuestionAnswerData> getAnswers(){
@@ -275,9 +382,12 @@ public class QuestionForm extends Form{
         QGroupBox gb = ((QGroupBox)children().stream().filter(i -> i.getObjectName().equals("TopGroupBox")).findFirst().get());
         QGroupBox mfgb = (QGroupBox) gb.children().stream().filter(i -> i.getObjectName().equals("MFGB")).findFirst().get();
         QRadioButton mRadio = (QRadioButton)mfgb.children().stream().filter(i -> i.getObjectName().equals("MaleRadioButton")).findFirst().get();
+        QGroupBox lsForm = (QGroupBox) gb.children().stream().filter(i -> i.getObjectName().equals("Form")).findFirst().get();
+        QRadioButton lRadio = (QRadioButton)lsForm.children().stream().filter(i -> i.getObjectName().equals("LongRadioButton")).findFirst().get();
         boolean male = mRadio.isChecked();
+        boolean isLong = lRadio.isChecked();
 
-        ResultProcessor rp = new ResultProcessor(male);
+        ResultProcessor rp = new ResultProcessor(male, isLong);
         System.out.println(rp.getJSONFromAnswers(answers));
     }
 

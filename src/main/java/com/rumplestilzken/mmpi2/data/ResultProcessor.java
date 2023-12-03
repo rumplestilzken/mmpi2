@@ -19,11 +19,13 @@ import java.util.Map;
 
 public class ResultProcessor {
 
-    public ResultProcessor(boolean isMale) {
+    public ResultProcessor(boolean isMale, boolean isLong) {
+        this.isLong = isLong;
         this.isMale = isMale;
     }
 
     boolean isMale = false;
+    boolean isLong = false;
 
     public String getJSONFromAnswers(List<QuestionData.QuestionAnswerData> answers) {
         JSONObject answerObject = new JSONObject();
@@ -35,6 +37,7 @@ public class ResultProcessor {
         answerObject.put("Profile Evaluation", sp.process(answers, scaleList, criticalScales, isMale));
 
         answerObject.put("gender", isMale ? "Male" : "Female");
+        answerObject.put("form", isLong ? "Long" : "Short");
 
         scaleList.stream().forEachOrdered(i -> {
             Map<String, String> map = new HashMap<>();
@@ -118,7 +121,7 @@ public class ResultProcessor {
         document.add(peParagraph);
 
         StringBuilder answerString = new StringBuilder();
-        for(int i = 0; i < answers.size()-1; i++){
+        for(int i = 0; i < answers.size(); i++){
             QuestionData.QuestionAnswerData a = answers.get(i);
             if(a.getAnswer() == null) {
                 answerString.append("?");
@@ -295,6 +298,10 @@ public class ResultProcessor {
         addEmptyLine(titlePage, 3);
 
         titlePage.add(new Paragraph("T Scale Used: " + (isMale ? "Male" : "Female")));
+
+        addEmptyLine(titlePage, 3);
+
+        titlePage.add(new Paragraph("Form: " + (isLong ? "Long" : "Short")));
 
         document.add(titlePage);
     }
