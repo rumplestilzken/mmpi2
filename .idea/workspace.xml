@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Continued Scales.">
+    <list default="true" id="8e0ce8ab-c478-4137-a275-d5c6d949a98c" name="Changes" comment="Continued Scales.&#10;Most of Load/Save implemented">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/ResultProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/ResultProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/data/Storage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/QuestionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/QuestionForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/ResultsForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/ResultsForm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,9 +63,9 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -76,7 +76,7 @@
       <recent name="com.rumplestilzken.mmpi2.data" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.mmpi2-java::media:nick:dev:development:git:mmpi2-java [run]">
+  <component name="RunManager" selected="Gradle.mmpi2-java::media:nick:dev:development:git:mmpi2-java [distZip]">
     <configuration name="com.rumplestilzken.Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -92,6 +92,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="mmpi2-java::media:nick:dev:development:git:mmpi2-java [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="/media/nick/dev/development/git/mmpi2-java" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="mmpi2-java::media:nick:dev:development:git:mmpi2-java [distTar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -104,6 +126,28 @@
         <option name="taskNames">
           <list>
             <option value="distTar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="mmpi2-java::media:nick:dev:development:git:mmpi2-java [distZip]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="/media/nick/dev/development/git/mmpi2-java" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="distZip" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -173,8 +217,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.mmpi2-java::media:nick:dev:development:git:mmpi2-java [run]" />
+        <item itemvalue="Gradle.mmpi2-java::media:nick:dev:development:git:mmpi2-java [distZip]" />
         <item itemvalue="Gradle.mmpi2-java::media:nick:dev:development:git:mmpi2-java [distTar]" />
+        <item itemvalue="Gradle.mmpi2-java::media:nick:dev:development:git:mmpi2-java [run]" />
+        <item itemvalue="Gradle.mmpi2-java::media:nick:dev:development:git:mmpi2-java [build]" />
         <item itemvalue="Gradle.mmpi2-java::media:nick:dev:development:git:mmpi2-java [jar]" />
       </list>
     </recent_temporary>
@@ -516,7 +562,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701452581381</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Continued Scales.&#10;Most of Load/Save implemented">
+      <option name="closed" value="true" />
+      <created>1701602587237</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1701602587237</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -534,7 +588,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Continued development" />
     <MESSAGE value="QuestionForm and ResultProcessor linked." />
     <MESSAGE value="More questions work" />
     <MESSAGE value="Scales created." />
@@ -559,14 +612,15 @@
     <MESSAGE value="Continued scales" />
     <MESSAGE value="Colored pathology" />
     <MESSAGE value="Continued Scales." />
-    <option name="LAST_COMMIT_MESSAGE" value="Continued Scales." />
+    <MESSAGE value="Continued Scales.&#10;Most of Load/Save implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="Continued Scales.&#10;Most of Load/Save implemented" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file:///media/nick/dev/development/git/mmpi2-java/src/main/java/com/rumplestilzken/mmpi2/ui/qt/form/QuestionForm.java</url>
-          <line>182</line>
+          <line>177</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

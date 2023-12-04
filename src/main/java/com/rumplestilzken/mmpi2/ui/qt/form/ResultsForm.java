@@ -19,7 +19,16 @@ public class ResultsForm extends Form {
         next.hide();
 
         QGridLayout layout = (QGridLayout)layout();
-        QLabel label = new QLabel("label");
-        layout.addWidget(label);
+
+        QTableWidget table = new QTableWidget();
+        table.setColumnCount(5);
+        table.setItem(0, 0, new QTableWidgetItem("Scale"));
+        table.setItem(0, 1, new QTableWidgetItem("Scale Description"));
+        table.setItem(0, 2, new QTableWidgetItem("Raw Score"));
+        table.setItem(0, 3, new QTableWidgetItem("K Score"));
+        table.setItem(0, 4, new QTableWidgetItem("T Score"));
+
+
+        layout.addWidget(table);
     }
 }

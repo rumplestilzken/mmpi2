@@ -7,18 +7,12 @@ import com.rumplestilzken.mmpi2.data.scale.CriticalScale;
 import com.rumplestilzken.mmpi2.data.scale.Scale;
 import com.rumplestilzken.mmpi2.data.scale.ScaleProcessor;
 import com.rumplestilzken.mmpi2.data.scale.Scales;
-import io.qt.NonNull;
 import io.qt.core.QObject;
-import io.qt.core.QString;
-import io.qt.core.QStringList;
 import io.qt.core.Qt;
 import io.qt.widgets.*;
 import org.json.JSONObject;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +32,7 @@ public class QuestionForm extends Form{
                 .children().stream().filter(i -> i.getObjectName().equals("Next")).findFirst().get());
         next.setText("Get Results");
         next.setEnabled(false);
+        next.hide();
 
         ((QMenu)mainWindow.menuBar().findChild("File")).clear();
 
@@ -53,7 +48,7 @@ public class QuestionForm extends Form{
 
         QAction saveJSONAction = new QAction("Save JSON");
         saveJSONAction.setObjectName("SaveJSON");
-        saveJSONAction.triggered.connect(this, "getResults()");
+        saveJSONAction.triggered.connect(this, "saveJSON()");
         saveJSONAction.setEnabled(false);
         ((QMenu)mainWindow.menuBar().findChild("File")).addAction(saveJSONAction);
 
@@ -217,6 +212,7 @@ public class QuestionForm extends Form{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        genderButtonClicked();
     }
 
     private void loadAnswersFromText() {
@@ -352,7 +348,7 @@ public class QuestionForm extends Form{
 
         ResultProcessor rp = new ResultProcessor(male, isLong);
 
-        QFileDialog.Result<String> dialog = QFileDialog.getOpenFileName();
+        QFileDialog.Result<String> dialog = QFileDialog.getSaveFileName();
         boolean success = rp.writePDFDocument(answers, dialog.result);
     }
 
@@ -376,7 +372,7 @@ public class QuestionForm extends Form{
         return answers;
     }
 
-    void getResults() {
+    void saveJSON() {
         List<QuestionData.QuestionAnswerData> answers = getAnswers();
 
         QGroupBox gb = ((QGroupBox)children().stream().filter(i -> i.getObjectName().equals("TopGroupBox")).findFirst().get());
@@ -388,7 +384,19 @@ public class QuestionForm extends Form{
         boolean isLong = lRadio.isChecked();
 
         ResultProcessor rp = new ResultProcessor(male, isLong);
-        System.out.println(rp.getJSONFromAnswers(answers));
+        String json = rp.getJSONFromAnswers(answers);
+
+        QFileDialog.Result<String> dialog = QFileDialog.getSaveFileName();
+        OutputStream out = null;
+        try {
+            out = new FileOutputStream(dialog.result);
+            out.write(json.getBytes());
+            out.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     void shortForm() {
