@@ -47,8 +47,8 @@ distributions {
 }
 
 jar {
+    archiveBaseName = "mmpi2"
     manifest {
-        archiveBaseName = "mmpi2"
         attributes(
                 'Main-Class': 'com.rumplestilzken.Main'
         )
