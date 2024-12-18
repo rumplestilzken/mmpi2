@@ -13,6 +13,7 @@ plugins {
     id 'idea'
     id "org.beryx.jlink" version "2.25.0"
     id 'org.javamodularity.moduleplugin' version "1.8.15"
+    id 'distribution'
 }
 
 group = "com.rumplestilzken"
@@ -28,7 +29,6 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
 
     // This dependency is used by the application.
-    implementation 'com.google.guava:guava:30.1.1-jre'
     implementation group: 'org.json', name: 'json', version: '20231013'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.16.0'
     implementation group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.4'
@@ -40,8 +40,15 @@ application {
     application.mainModule = "mmpi.app.main"
 }
 
+distributions {
+    main {
+        distributionBaseName = "mmpi2"
+    }
+}
+
 jar {
     manifest {
+        archiveBaseName = "mmpi2"
         attributes(
                 'Main-Class': 'com.rumplestilzken.Main'
         )
