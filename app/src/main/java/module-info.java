@@ -1,0 +1,2 @@
+module mmpi.app.main {
+}
