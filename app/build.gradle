@@ -12,8 +12,15 @@ plugins {
     id 'java'
     id 'idea'
     id "org.beryx.jlink" version "2.25.0"
+//    id 'org.beryx.runtime' version '1.13.1'
     id 'org.javamodularity.moduleplugin' version "1.8.15"
     id 'distribution'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
+}
+
+javafx {
+    version = "19"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 group = "com.rumplestilzken"
@@ -32,6 +39,9 @@ dependencies {
     implementation group: 'org.json', name: 'json', version: '20231013'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.16.0'
     implementation group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.4'
+//    implementation group: 'org.openjfx', name: 'javafx-fxml', version: '11'
+//    implementation group: 'org.openjfx', name: 'javafx-graphics', version: '11'
+//    implementation group: 'org.openjfx', name: 'javafx-controls', version: '11'
 }
 
 application {
@@ -53,10 +63,19 @@ jar {
                 'Main-Class': 'com.rumplestilzken.Main'
         )
     }
+
 }
 
+
 jlink {
-    launcher {
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher{
         name = 'MMPI-2'
+        jvmArgs = ['-Dlog4j.configurationFile=./log4j2.xml']
     }
+    imageName = "MMPI-2-" + version
+//    addExtraDependencies("javafx")
+//    addExtraModulePath("/home/nick/bin/javafx-sdk-21.0.1/lib")
 }
+
+
