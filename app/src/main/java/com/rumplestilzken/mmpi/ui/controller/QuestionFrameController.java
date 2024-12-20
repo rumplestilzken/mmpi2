@@ -10,7 +10,7 @@ import javafx.scene.control.ToggleGroup;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class QuestionFrame implements Initializable {
+public class QuestionFrameController implements Initializable {
 
     @FXML
     ToggleGroup sexToggleGroup;
