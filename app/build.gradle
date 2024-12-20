@@ -29,6 +29,9 @@ version = 1.0
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+    maven{
+        url "https://nexus.gluonhq.com/nexus/content/repositories/releases/"
+    }
 }
 
 dependencies {
@@ -39,9 +42,8 @@ dependencies {
     implementation group: 'org.json', name: 'json', version: '20231013'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.16.0'
     implementation group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.4'
-//    implementation group: 'org.openjfx', name: 'javafx-fxml', version: '11'
-//    implementation group: 'org.openjfx', name: 'javafx-graphics', version: '11'
-//    implementation group: 'org.openjfx', name: 'javafx-controls', version: '11'
+    implementation group: 'com.gluonhq', name: 'charm-glisten', version: '6.2.3'
+
 }
 
 application {

@@ -7,6 +7,9 @@ module mmpi.app.main {
     requires org.json;
 
     opens com.rumplestilzken to javafx.fxml;
+    opens com.rumplestilzken.mmpi.ui.controller to javafx.fxml;
 
     exports com.rumplestilzken;
+    exports com.rumplestilzken.mmpi.ui.controller to javafx.fxml;
+
 }

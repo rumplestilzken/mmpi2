@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rumplestilzken.mmpi.ui.controller.QuestionFrame">
+   <children>
+      <AnchorPane prefHeight="71.0" prefWidth="1133.0">
+         <children>
+            <TilePane layoutX="755.0" prefHeight="27.0" prefWidth="238.0">
+               <children>
+                  <RadioButton fx:id="maleRadioButton" mnemonicParsing="false" onAction="#maleRadioButtonAction" prefHeight="27.0" prefWidth="111.0" text="Male">
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="sexToggleGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="femaleRadioButton" mnemonicParsing="false" onAction="#femaleRadioButtonAction" prefHeight="27.0" prefWidth="108.0" text="Female" />
+               </children>
+            </TilePane>
+            <TilePane layoutX="754.0" layoutY="39.0" prefHeight="23.0" prefWidth="245.0">
+               <children>
+                  <RadioButton fx:id="shortFormRadioButton" mnemonicParsing="false" onAction="#shortFormRadioButtonAction" prefHeight="23.0" prefWidth="116.0" text="Short Form">
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="formToggleGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="longFormRadioButtion" mnemonicParsing="false" onAction="#longFormRadioButtonAction" prefHeight="18.0" prefWidth="116.0" text="Long Form" toggleGroup="$formToggleGroup" />
+               </children>
+            </TilePane>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="567.0" prefWidth="1000.0">
+         <children>
+            <ScrollPane layoutX="4.0" prefHeight="615.0" prefWidth="994.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+              </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
