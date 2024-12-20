@@ -22,13 +22,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class QuestionFrameController implements Initializable {
-
-    @FXML
-    ToggleGroup sexToggleGroup;
-
-    @FXML
-    ToggleGroup formToggleGroup;
-
     @FXML
     RadioButton maleRadioButton;
 
@@ -42,15 +35,10 @@ public class QuestionFrameController implements Initializable {
     RadioButton longFormRadioButton;
 
     @FXML
-    ScrollPane questionScrollPane;
-
-    @FXML
     VBox questionVBox;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       Toggle t = sexToggleGroup.getSelectedToggle();
-        System.out.println("Hello World.");
     }
 
     @FXML
