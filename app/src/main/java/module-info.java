@@ -11,5 +11,4 @@ module mmpi.app.main {
 
     exports com.rumplestilzken;
     exports com.rumplestilzken.mmpi.ui.controller to javafx.fxml;
-
 }

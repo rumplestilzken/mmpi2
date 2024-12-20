@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="74.0" prefWidth="980.0">
+         <children>
+            <TilePane fx:id="radioButtonTilePane" prefHeight="43.0" prefWidth="93.0">
+               <children>
+                  <RadioButton fx:id="trueRadioButton" mnemonicParsing="false">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="questionAnswerToggleGroup" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="unansweredRadioButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="18.0" selected="true" toggleGroup="$questionAnswerToggleGroup">
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </RadioButton>
+                  <RadioButton fx:id="falseRadioButton" mnemonicParsing="false" toggleGroup="$questionAnswerToggleGroup">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </RadioButton>
+               </children>
+            </TilePane>
+            <TextArea editable="false" layoutX="93.0" layoutY="1.0" prefHeight="43.0" prefWidth="881.0" />
+         </children>
+      </AnchorPane>
+   </children>
+   <padding>
+      <Insets bottom="5.0" top="5.0" />
+   </padding>
+</VBox>
