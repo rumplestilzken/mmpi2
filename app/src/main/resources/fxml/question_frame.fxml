@@ -12,9 +12,9 @@
    <children>
       <AnchorPane prefHeight="71.0" prefWidth="1133.0">
          <children>
-            <TilePane layoutX="755.0" prefHeight="27.0" prefWidth="238.0">
+            <TilePane alignment="CENTER" layoutX="748.0" prefHeight="34.0" prefWidth="245.0">
                <children>
-                  <RadioButton fx:id="maleRadioButton" mnemonicParsing="false" onAction="#maleRadioButtonAction" prefHeight="27.0" prefWidth="111.0" text="Male">
+                  <RadioButton fx:id="maleRadioButton" mnemonicParsing="false" onAction="#maleRadioButtonAction" prefHeight="23.0" prefWidth="112.0" text="Male">
                      <padding>
                         <Insets bottom="5.0" />
                      </padding>
@@ -22,12 +22,12 @@
                         <ToggleGroup fx:id="sexToggleGroup" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="femaleRadioButton" mnemonicParsing="false" onAction="#femaleRadioButtonAction" prefHeight="27.0" prefWidth="108.0" text="Female" />
+                  <RadioButton fx:id="femaleRadioButton" mnemonicParsing="false" onAction="#femaleRadioButtonAction" prefHeight="18.0" prefWidth="105.0" text="Female" />
                </children>
             </TilePane>
-            <TilePane layoutX="754.0" layoutY="39.0" prefHeight="23.0" prefWidth="245.0">
+            <TilePane alignment="CENTER" layoutX="755.0" layoutY="40.0" prefHeight="10.0" prefWidth="245.0">
                <children>
-                  <RadioButton fx:id="shortFormRadioButton" mnemonicParsing="false" onAction="#shortFormRadioButtonAction" prefHeight="23.0" prefWidth="116.0" text="Short Form">
+                  <RadioButton fx:id="shortFormRadioButton" mnemonicParsing="false" onAction="#shortFormRadioButtonAction" prefHeight="14.0" prefWidth="116.0" text="Short Form">
                      <padding>
                         <Insets bottom="5.0" />
                      </padding>
@@ -35,7 +35,7 @@
                         <ToggleGroup fx:id="formToggleGroup" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="longFormRadioButtion" mnemonicParsing="false" onAction="#longFormRadioButtonAction" prefHeight="18.0" prefWidth="116.0" text="Long Form" toggleGroup="$formToggleGroup" />
+                  <RadioButton fx:id="longFormRadioButtion" mnemonicParsing="false" onAction="#longFormRadioButtonAction" prefHeight="7.0" prefWidth="115.0" text="Long Form" toggleGroup="$formToggleGroup" />
                </children>
             </TilePane>
          </children>
